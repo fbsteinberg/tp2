@@ -8,10 +8,11 @@ class CU_InformarEstadoSolicitud {
         this.enviadorDeMails = enviadorDeMails
     }
 
-    async validar({idPropietarioLocal, idSolicitud}){
+    async validar(idSolicitud){
         const solicitud = await this.daoSolicitud.getById(idSolicitud)
         const local = await this.daoLocal.getById(solicitud.idLocal)
-        const propietario = await this.daoLocal.getPropetarioById(idPropietarioLocal)
+        console.log(solicitud)
+        const propietario = local.propietario
         let templateMail = solicitud.estado == 'pendiente-aprobacion' ? await this.generarMailAprobacion(solicitud) : await this.generarMailRechazo(solicitud)
         templateMail = templateMail.toString().replace('#APELLIDO_PROPIETARIO#', propietario.apellido).replace('#NOMBRE_PROPIETARIO#', propietario.nombre).replace('#ID_SOLICITUD#', idSolicitud).replace('#FECHA_SOLICITUD#', solicitud.fechaSolicitud).replace('#LOCAL#', local.nombre)
         await this.enviadorDeMails.sendEmail(propietario.email.toString(), 'Estado de su solicitud', templateMail)

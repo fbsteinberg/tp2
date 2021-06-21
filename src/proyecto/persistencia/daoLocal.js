@@ -3,6 +3,11 @@ const crearDaoLocal = () => {
         {
             id: 0,
             nombre: 'Rapipago',
+            propietario: {
+                nombre:'Jose',
+                apellido:'perez',
+                email: 'joseperez@gmail.com'
+            },
             cantidad: 30,
             horarioMin: 12,
             horarioMax: 18,
