@@ -6,9 +6,9 @@
   "main": "index.js",
   "scripts": {
     "start": "node src/main.js",
-    "test NA": "node test/testNotificarAdministrador.js",
-    "test EC": "node test/testEncolarCliente.js",
-    "test IE": "node test/testInformarEstadoSolicitud.js"
+    "testNA": "node test/testNotificarAdministrador.js",
+    "testEC": "node test/testEncolarCliente.js",
+    "testIE": "node test/testInformarEstadoSolicitud.js"
   },
   "author": "",
   "license": "ISC",
