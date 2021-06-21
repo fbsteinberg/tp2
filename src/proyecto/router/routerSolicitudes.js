@@ -1,5 +1,5 @@
 import express from 'express'
-import CUFactory from '../negocio/CU_AprobarRechazarSolicitud/aprobarRechazarSolicitudFactory.js';
+import CUFactory from '../negocio/CU_InformarEstadoSolicitud/InformarEstadoSolicitudFactory.js'
 
 const router = express.Router()
 

@@ -1,6 +1,6 @@
 import fs from 'fs'
 
-class CU_AprobarRechazarSolicitud {
+class CU_InformarEstadoSolicitud {
     constructor(daoSolicitud, daoLocal, generadorDeQR, enviadorDeMails){
         this.daoSolicitud = daoSolicitud,
         this.daoLocal = daoLocal,
@@ -38,4 +38,4 @@ class CU_AprobarRechazarSolicitud {
     }
 }
 
-export default CU_AprobarRechazarSolicitud
+export default CU_InformarEstadoSolicitud
