@@ -21,9 +21,9 @@ function crearSolicitud(datos, id = null) {
     }
 
     if (!solicitud.fechaSolicitud) {
-        throw crearErrorDatosInvalidos('falta el dni')
+        throw crearErrorDatosInvalidos('falta la fecha de la solicitud')
     } else {
-        solicitud.dni = datos.dni;
+        solicitud.dni = datos.fechaSolicitud;
     }
 
     if (id) {
