@@ -1,5 +1,5 @@
-import { crearServidor } from './compartidos/servidor/servidor.js';
-import { getServerPort } from './config.js';
+import { crearServidor } from '../src/compartidos/servidor/servidor.js';
+import { getServerPort } from '../src/config.js';
 import axios from 'axios';
 
 const servidor = crearServidor();

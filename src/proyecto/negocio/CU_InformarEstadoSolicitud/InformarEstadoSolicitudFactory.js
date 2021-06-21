@@ -5,7 +5,7 @@ import { crearDaoLocal } from '../../persistencia/daoLocal.js'
 import { crearDaoSolicitud } from '../../persistencia/daoSolicitud.js'
 
 const enviadorDeMails = MailerFactory.crearMailer()
-const generadorQR = QRFactory.generadorQR('static')
+const generadorQR = QRFactory.crearGeneradorQR('static')
 
 const daoLocal = crearDaoLocal()
 const daoSolicitud = crearDaoSolicitud()

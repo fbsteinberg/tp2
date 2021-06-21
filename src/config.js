@@ -17,6 +17,6 @@ const getMailAdmin = () => {
     return process.env.MAIL_ADMIN
 }
 
-const getServerPort = process.env.SERVER_PORT || 3000;
+const getServerPort = () => process.env.SERVER_PORT || 3000;
 
 export { getMailConfig, getServerPort, getRecepcionDeArchivosConfig, getMailAdmin};
