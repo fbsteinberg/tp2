@@ -5,7 +5,8 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "start": "node src/main.js"
+    "start": "node src/main.js",
+    "test cu3": "node test/testEncolarCliente.js"
   },
   "author": "",
   "license": "ISC",

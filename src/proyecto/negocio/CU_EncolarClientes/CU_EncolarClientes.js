@@ -1,30 +1,21 @@
 /**
  * Caso de uso:
  * 
- * Como cliente quiero poder a traves de un QR generado, poder agregarme a una cola de turnos
+ * Como cliente quiero poder agregarme a una cola de turnos de un local
  */
-const generarEncolarCliente = async (daoClientes, daoColas, enviadorMail, generadorQR) => {
-    await generadorQR.generar({
-        archivo: 'output.png',
-        texto: '1',
-        ancho: 600,
-        margen: 2, 
-        colorQR: '#000',
-        colorFondo: '#fff'
-    });
-
+const generarEncolarCliente = async (daoClientes, daoLocal, enviadorMail) => {
     return {
-        agregar: async ({ idCliente, idCola }) => {
+        agregar: async ({ idCliente, idLocal }) => {
             const cliente = await daoClientes.getById(idCliente);
             console.log(`Cliente encontrado!`);
 
-            const cola = await daoColas.getById(idCola);
-            console.log(`Cola encontrada!`);
+            const local = await daoLocal.getById(idLocal);
+            console.log(`Local encontrado!`);
 
-            await daoColas.addClient(idCola, cliente);
-            console.log(`Usuario ${cliente.nombre} agregado a la cola ${cola.id} - ${cola.nombre}`);
+            await daoLocal.addClient(idLocal, cliente);
+            console.log(`Usuario ${cliente.nombre} agregado a la cola del local ${local.id} - ${local.nombre}`);
 
-            const responseEmail = await enviadorMail.sendEmail(cliente.email, `Cola: ${cola.nombre}`, `Se ha agregado exitosamente para la cola de ${cola.nombre}`);
+            const responseEmail = await enviadorMail.sendEmail(cliente.email, `Local: ${local.nombre}`, `Se ha agregado exitosamente para la cola del local ${local.nombre}`);
             const { response } = responseEmail;
 
             console.log(`Mail enviado exitosamente: ${response}`);
