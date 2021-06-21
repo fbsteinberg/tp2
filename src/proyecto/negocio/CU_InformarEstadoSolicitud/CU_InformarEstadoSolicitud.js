@@ -1,10 +1,10 @@
 import fs from 'fs'
 
 class CU_InformarEstadoSolicitud {
-    constructor(daoSolicitud, daoLocal, generadorDeQR, enviadorDeMails){
+    constructor(daoSolicitud, daoLocal, generadorQR, enviadorDeMails){
         this.daoSolicitud = daoSolicitud,
         this.daoLocal = daoLocal,
-        this.generadorDeQR = generadorDeQR,
+        this.generadorQR = generadorQR,
         this.enviadorDeMails = enviadorDeMails
     }
 
@@ -19,15 +19,16 @@ class CU_InformarEstadoSolicitud {
 
     async generarMailAprobacion(solicitud){
         let mailAprobacion = await fs.promises.readFile('mail_templates/solicitudAceptada.html')
-            const QR = await this.generadorDeQR.generar({
-                archivo: `${local.nombre}.png`,
-                texto: `https://localhost:3000/api/usuarios/unirseACola?local=${solicitud.idLocal}` ,
-                ancho: 600,
-                margen: 2, 
-                colorQR: '#34ebb1',
-                colorFondo: '#0000'
-            })
-            mailAprobacion = mailAprobacion.toString().replace('#QR#', QR)
+        const local = await this.daoLocal.getById(solicitud.idLocal)
+        const QR = await this.generadorQR.generar({
+            archivo: `${local.nombre}.png`,
+            texto: `https://localhost:3000/api/usuarios/unirseACola?local=${solicitud.idLocal}` ,
+            ancho: 600,
+            margen: 2, 
+            colorQR: '#34ebb1',
+            colorFondo: '#0000'
+        })
+        mailAprobacion = mailAprobacion.toString().replace('#QR#', QR).replace('#MAIL_PROPIETARIO#', local.propietario.email).replace('#PASSWORD#', local.propietario.password)
         return mailAprobacion
     }
 
