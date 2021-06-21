@@ -5,8 +5,8 @@ const router = express.Router()
 
 router.get('/:idSolicitud', async (req, res) => {
   try {
-    const crearCU_AprobarRechazarSolicitud = CUFactory.crearCU_AprobarRechazarSolicitud()
-    await crearCU_AprobarRechazarSolicitud.validar({
+    const crearCU_InformarEstadoSolicitud = CUFactory.crearCU_InformarEstadoSolicitud()
+    await crearCU_InformarEstadoSolicitud.validar({
       idSolicitud: req.params.idSolicitud,
       ...req.body,
     })
