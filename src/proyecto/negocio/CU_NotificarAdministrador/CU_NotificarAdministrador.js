@@ -7,7 +7,7 @@ class CasoDeUso_NotificarAdministrador
     }
     async hacer(urlArchivo, mailAdmin)
     {
-        this.daoSolicitud.guardarSolicitud()
+        this.daoSolicitud.guardarSolicitud(urlArchivo)
 
         //Generar enlace para acceder al documento
         const enlaceArchivo = '<a href='+urlArchivo+'>Aqui</a>'
