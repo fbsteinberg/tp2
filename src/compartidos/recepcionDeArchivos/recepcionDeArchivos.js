@@ -27,7 +27,7 @@ async function crearDirectorio(ruta)
     {
         if(err.code == 'ENOENT' || err.code == 'EEXIST')
         {
-            console.log('La ruta ya existe')
+            //console.log('La ruta ya existe')
         }
         else
         {
