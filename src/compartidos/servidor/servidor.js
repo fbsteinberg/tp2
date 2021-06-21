@@ -7,6 +7,7 @@ const crearServidor = () => {
     const app = express();
 
     app.use(express.json());
+    app.use('/static', express.static('./'));
 
     app.use('/api/cola', routerColaClientes.crearColaClientesRouter());
     app.use('/api/solicitudes', routerSolicitudes);

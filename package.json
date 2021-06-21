@@ -5,7 +5,8 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "start": "node src/main.js"
+    "start": "node src/main.js",
+    "pruebaNA": "node test/Test_CU_NotificarAdministrador.js"
   },
   "author": "",
   "license": "ISC",
