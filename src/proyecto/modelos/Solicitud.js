@@ -8,33 +8,33 @@ function crearSolicitud(datos, id = null) {
     solicitud.id = nextId
 
 
-    if (!datos.idLocal) {
+    if (!solicitud.idLocal) {
         throw crearErrorDatosInvalidos('Falta el id del local')
     } else {
         solicitud.idLocal = datos.idLocal
     }
 
-    if (!datos.estado) {
+    if (!solicitud.estado) {
         throw crearErrorDatosInvalidos('Falta el estado de la solicitud')
     } else {
-        cliente.estado = datos.estado
+        solicitud.estado = datos.estado
     }
 
-    if (!cliente.dni) {
+    if (!solicitud.fechaSolicitud) {
         throw crearErrorDatosInvalidos('falta el dni')
     } else {
-        cliente.dni = datos.dni;
+        solicitud.dni = datos.dni;
     }
 
     if (id) {
-        cliente.id = Number(id);
+        solcitud.id = Number(id);
     } else if (!isNaN(Number(datos.id))) {
-        cliente.id = Number(datos.id);
+        solicitud.id = Number(datos.id);
     } else {
-        cliente.id = nextId++;
+        solicitud.id = nextId++;
     }
 
-    return cliente;
+    return solicitud;
 }
 
-export { crearCliente };
+export { crearSolicitud };
