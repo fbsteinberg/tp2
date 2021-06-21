@@ -1,16 +1,52 @@
-function crearDaoLocal(){
+const crearDaoLocal = () => {
+    const locales = [
+        {
+            id: 0,
+            nombre: 'Rapipago',
+            cantidad: 30,
+            horarioMin: 12,
+            horarioMax: 18,
+            clientes: []
+        }
+    ];
+
     const daoLocal = {
-        getById: (id) => {
-            console.log('local encontrado!')
-            return { id, nombre:'Rapipago'}
+        add: (local) => {
+            locales.push(local);
         },
-        getPropetarioById: (id) => {
-            console.log('Propetario encontrado!')
-            return { id, nombre:'Jose', apellido:'Perez', email:'joseperez@gmail.com'}
+        addUnique: (estudiante, claveUnica) => {
+            const existe = estudiantes.some(e => e[claveUnica] === estudiante[claveUnica]);
+            if (existe) {
+                return { added: 0 };
+            } else {
+                estudiantes.push(estudiante);
+                return { added: 1 };
+            }
+        },
+        getById: (id) => {
+            return locales.find(e => e.id === id);
+        },
+        addClient: (id, cliente) => {
+            const index = locales.findIndex(e => e.id == id);
+            if (index === -1) {
+                return { updated: 0 };
+            } else {
+                locales[index].clientes.push(cliente);
+                return { updated: 1 };
+            }
+        },
+        removeFirstClient: (id) => {
+            const index = locales.findIndex(e => e.id == id);
+            if (index === -1) {
+                return { updated: 0 };
+            } else {
+                locales[index].clientes.shift();
+                return { updated: 1 };
+            }
         }
     }
 
-    return daoLocal
+    return daoLocal;
 }
 
-export { crearDaoLocal }
+export { crearDaoLocal };

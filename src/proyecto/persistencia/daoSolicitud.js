@@ -1,4 +1,4 @@
-function crearDaoSolicitud(){
+const crearDaoSolicitud = () => {
     const daoSolicitud = {
         getById: (idSolicitud) => {
             console.log('solicitud encontrada!')
