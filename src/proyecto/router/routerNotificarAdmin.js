@@ -1,12 +1,12 @@
 import express from 'express';
 import factoryCU from '../negocio/CU_NotificarAdministrador/notificarAdministradorFactory.js';
-import {crearRecepcionDeArchivos} from '../../compartidos/recepcionDeArchivos/recepcionDeArchivosFactory.js';
+import factoryRA from '../../compartidos/recepcionDeArchivos/recepcionDeArchivosFactory.js';
 import {getServerPort, getMailAdmin} from '../../config.js'
 import {crearErrorFaltaArchivo} from '../errores/errorFaltaArchivo.js'
 
 const crearNotificarAdminRouter = (puerto, rutaArchivo) => {
     const router = express.Router();
-    const manejadorArchivos = crearRecepcionDeArchivos()
+    const manejadorArchivos = factoryRA.crearRecepcionDeArchivos()
 
     router.post('/cargarSolicitud', manejadorArchivos.single('archivo'),async (req,res) => {
         try{
