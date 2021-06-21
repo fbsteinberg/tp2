@@ -5,7 +5,7 @@ class CasoDeUso_NotificarAdministrador
         this.generadorDeEmail = generadorDeEmail
         this.daoSolicitud = daoSolicitud
     }
-    async hacer(urlArchivo, mailAdmin)
+    async hacer(urlArchivo, mailAdmin, mailPropietario)
     {
 
 
@@ -15,7 +15,7 @@ class CasoDeUso_NotificarAdministrador
         try{
             this.daoSolicitud.guardarSolicitud(urlArchivo)
             //Enviar el mail al administrador
-            const respuesta = await this.generadorDeEmail.sendEmail(mailAdmin, 'Solicitud Aprobación de Propietario',
+            const respuesta = await this.generadorDeEmail.sendEmail(mailAdmin, mailPropietario, 'Solicitud Aprobación de Propietario',
             'Enlace a la documentación: '+enlaceArchivo);
             console.log('mail de nueva solicitud enviado al administrador ')
         }
