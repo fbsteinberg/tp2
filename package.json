@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node src/main.js",
-    "test NA": "node test/Test_CU_NotificarAdministrador.js",
+    "test NA": "node test/testNotificarAdministrador.js",
     "test EC": "node test/testEncolarCliente.js"
   },
   "author": "",
