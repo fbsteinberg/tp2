@@ -14,12 +14,12 @@ const crearDaoLocal = () => {
         add: (local) => {
             locales.push(local);
         },
-        addUnique: (estudiante, claveUnica) => {
-            const existe = estudiantes.some(e => e[claveUnica] === estudiante[claveUnica]);
+        addUnique: (local, claveUnica) => {
+            const existe = locales.some(e => e[claveUnica] === local[claveUnica]);
             if (existe) {
                 return { added: 0 };
             } else {
-                estudiantes.push(estudiante);
+                locales.push(local);
                 return { added: 1 };
             }
         },
