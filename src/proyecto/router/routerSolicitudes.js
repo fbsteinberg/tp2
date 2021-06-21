@@ -3,7 +3,7 @@ import CUFactory from '../negocio/CU_InformarEstadoSolicitud/InformarEstadoSolic
 
 const router = express.Router()
 
-router.get('/:idSolicitud', async (req, res) => {
+router.post('/:idSolicitud', async (req, res) => {
   try {
     const crearCU_InformarEstadoSolicitud = CUFactory.crearCU_InformarEstadoSolicitud()
     await crearCU_InformarEstadoSolicitud.validar(req.params.idSolicitud)
