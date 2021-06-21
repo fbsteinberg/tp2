@@ -8,7 +8,7 @@ const crearNotificarAdminRouter = async () => {
     const router = express.Router();
     const manejadorArchivos = await factoryRA.crearRecepcionDeArchivos()
 
-    router.post('/cargarSolicitud', manejadorArchivos.single('archivo'),async (req,res) => {
+    router.post('/cargarSolicitud', await manejadorArchivos.single('archivo'),async (req,res) => {
         try{
             if(Object.prototype.hasOwnProperty.call(req.file, 'originalname'))
             {
