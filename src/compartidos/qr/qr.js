@@ -1,6 +1,6 @@
 import QRCode from 'qrcode'
 
-async function generarQR(ruta) {
+function generarQR(ruta) {
     return {
         generar: async (opciones) => {
             try {
@@ -12,7 +12,7 @@ async function generarQR(ruta) {
                         light: opciones.colorFondo
                     }
                 }
-                await QRCode.toFile(`${ruta}/${opciones.archivo}`, opciones.texto, opciones.visualizacion)
+                QRCode.toFile(`${ruta}/${opciones.archivo}`, opciones.texto, opciones.visualizacion)
                 console.log(`QR Generado exitosamente en ${ruta}/${opciones.archivo}`)
             } catch (err) {
                 throw Error(`Ocurrió un error al general el QR. Detalles: ${err}`)

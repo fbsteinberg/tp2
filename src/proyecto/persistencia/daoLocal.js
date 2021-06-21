@@ -6,7 +6,8 @@ const crearDaoLocal = () => {
             propietario: {
                 nombre:'Jose',
                 apellido:'perez',
-                email: 'joseperez@gmail.com'
+                email: 'joseperez@gmail.com',
+                password: 12345
             },
             cantidad: 30,
             horarioMin: 12,
