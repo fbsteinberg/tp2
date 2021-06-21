@@ -1,6 +1,6 @@
 import CasoDeUso_InformarEstadoSolicitud from './CU_InformarEstadoSolicitud.js'
 import MailerFactory from '../../../compartidos/mail/mailFactory.js'
-import QRFactory from '../../../compartidos/QRFactory.js'
+import QRFactory from '../../../compartidos/qr/qrFactory.js'
 import { crearDaoLocal } from '../../persistencia/daoLocal.js'
 import { crearDaoSolicitud } from '../../persistencia/daoSolicitud.js'
 
