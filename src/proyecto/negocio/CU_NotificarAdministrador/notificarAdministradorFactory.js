@@ -1,15 +1,15 @@
 import CasoDeUso_NotificarAdministrador from './CU_NotificarAdministrador.js'
-import { crearDaoLocal } from '../../persistencia/daoLocal.js'
 import mailerFactory from '../../../compartidos/mail/mailFactory.js'
+import {crearDaoSolicitud} from '../../persistencia/daoSolicitud.js'
 
 async function crearCUFactory()
 {
-    const daoLocal = crearDaoLocal()
+    const daoSolicitud = crearDaoSolicitud()
     const generadorDeEmail = mailerFactory.crearMailer()
 
     return {
         crearCU : () => {
-            return new CasoDeUso_NotificarAdministrador(generadorDeEmail, daoLocal)
+            return new CasoDeUso_NotificarAdministrador(generadorDeEmail, daoSolicitud)
         }
     }
 }
