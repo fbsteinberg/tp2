@@ -9,7 +9,7 @@ async function main()
     const port = getServerPort();
     await servidor.conectar(port);
 
-    const { data } = await axios.get(`http://localhost:${port}/api/solicitudes/1`);
+    const { data } = await axios.post(`http://localhost:${port}/api/solicitudes/1`);
     console.log(data);
 
     await servidor.desconectar();
