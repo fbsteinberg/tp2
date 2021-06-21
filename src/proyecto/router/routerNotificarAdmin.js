@@ -4,7 +4,7 @@ import factoryRA from '../../compartidos/recepcionDeArchivos/recepcionDeArchivos
 import {getServerPort, getMailAdmin} from '../../config.js'
 import {crearErrorFaltaArchivo} from '../errores/errorFaltaArchivo.js'
 
-const crearNotificarAdminRouter = (puerto, rutaArchivo) => {
+const crearNotificarAdminRouter = () => {
     const router = express.Router();
     const manejadorArchivos = factoryRA.crearRecepcionDeArchivos()
 

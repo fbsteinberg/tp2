@@ -11,7 +11,7 @@ const crearServidor = () => {
 
     app.use('/api/cola', routerColaClientes.crearColaClientesRouter());
     app.use('/api/solicitudes', routerSolicitudes);
-    app.use('/api/notificar', routerNotificarAdmin.crearNotificarAdminRouter(8080, './src/solicitudes/persistencia/'));
+    app.use('/api/notificar', routerNotificarAdmin.crearNotificarAdminRouter());
 
     let server = null;
 
