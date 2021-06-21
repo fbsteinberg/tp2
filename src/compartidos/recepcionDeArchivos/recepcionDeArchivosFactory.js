@@ -1,16 +1,11 @@
 import moduloArchivos from './recepcionDeArchivos.js';
 import { getRecepcionDeArchivosConfig } from '../../config.js';
 
-
-
-
-
-
-
-async function crearRecepcionDeArchivos() {
+const crearRecepcionDeArchivos = async () => {
     const recepcionDeArchivosConfig = getRecepcionDeArchivosConfig();
-    const recepcionDeArchivos =  await moduloArchivos.crearMiddleWare(recepcionDeArchivosConfig)
-    return recepcionDeArchivos
+    const recepcionDeArchivos = await moduloArchivos.crearMiddleWare(recepcionDeArchivosConfig);
+
+    return recepcionDeArchivos;
 }
 
 export default { crearRecepcionDeArchivos };

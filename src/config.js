@@ -9,13 +9,9 @@ const getMailConfig = () => ({
     password: process.env.MAIL_PASSWORD_TEST
 });
 
-const getRecepcionDeArchivosConfig = () => {
-    return process.env.FILES_DIRECTORY
-}
+const getRecepcionDeArchivosConfig = () => process.env.FILES_DIRECTORY;
 
-const getMailAdmin = () => {
-    return process.env.MAIL_ADMIN
-}
+const getMailAdmin = () => process.env.MAIL_ADMIN;
 
 const getServerPort = () => process.env.SERVER_PORT || 3000;
 

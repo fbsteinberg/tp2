@@ -1,31 +1,27 @@
 import express from 'express';
 import factoryCU from '../negocio/CU_NotificarAdministrador/notificarAdministradorFactory.js';
 import factoryRA from '../../compartidos/recepcionDeArchivos/recepcionDeArchivosFactory.js';
-import {getServerPort, getMailAdmin} from '../../config.js'
-import {crearErrorFaltaArchivo} from '../errores/errorFaltaArchivo.js'
+import { getServerPort, getMailAdmin } from '../../config.js'
+import { crearErrorFaltaArchivo } from '../errores/errorFaltaArchivo.js'
 
-const crearNotificarAdminRouter = async () => {
+const manejadorArchivos = await factoryRA.crearRecepcionDeArchivos()
+
+const crearNotificarAdminRouter = () => {
     const router = express.Router();
-    const manejadorArchivos = await factoryRA.crearRecepcionDeArchivos()
 
-    router.post('/cargarSolicitud', manejadorArchivos.single('archivo'),async (req,res) => {
-        try{
-            if(Object.prototype.hasOwnProperty.call(req.file, 'originalname'))
-            {
-                const urlArchivo = 'http://localhost:'+getServerPort+'/static/'+req.file.originalname
+    router.post('/cargarSolicitud', manejadorArchivos.single('archivo'), async (req,res) => {
+        try {
+            if (Object.prototype.hasOwnProperty.call(req.file, 'originalname')) {
+                const urlArchivo = `http://localhost:${getServerPort()}/static/${req.file.originalname}`
+                console.log(urlArchivo)
                 const CUFactory = await factoryCU.crearCUFactory()
-                const cu = CUFactory.crearCU()
+                const cu = await CUFactory.crearCU()
                 await cu.hacer(urlArchivo, getMailAdmin)
-            }
-            else
-            {
+            } else {
                 throw new crearErrorFaltaArchivo('No se ha adjuntado el archivo')
             }
-
-        }
-        catch(err)
-        {
-            throw new Error('Se ha producido un error: '+err)
+        } catch(err) {
+            throw new Error(`Se ha producido un error: ${err}`)
         }
     })
 
