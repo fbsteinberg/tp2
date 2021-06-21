@@ -4,5 +4,5 @@ function crearErrorDatosInvalidos(message) {
 
     return error;
 }
-  
+
 export { crearErrorDatosInvalidos };

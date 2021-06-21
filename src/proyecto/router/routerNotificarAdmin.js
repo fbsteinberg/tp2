@@ -1,25 +1,25 @@
 import express from 'express';
-import factoryCU from '../negocio/CU_NotificarAdministrador/notificarAdministradorFactory';
-import moduloArchivos from '../../compartidos/recepcionDeArchivos/recepcionDeArchivos.js';
+import factoryCU from '../negocio/CU_NotificarAdministrador/notificarAdministradorFactory.js';
+import {crearRecepcionDeArchivos} from '../../compartidos/recepcionDeArchivos/recepcionDeArchivosFactory.js';
+import {getServerPort, getMailAdmin} from '../../config.js'
+import {crearErrorFaltaArchivo} from '../errores/errorFaltaArchivo.js'
 
 const crearNotificarAdminRouter = (puerto, rutaArchivo) => {
     const router = express.Router();
-    const manejadorArchivos = await moduloArchivos.crearMiddleWare(rutaArchivo)
+    const manejadorArchivos = crearRecepcionDeArchivos()
 
     router.post('/cargarSolicitud', manejadorArchivos.single('archivo'),async (req,res) => {
         try{
-            if(Object.prototype.hasOwnProperty.call(req.body, 'idUsuario') &&
-            Object.prototype.hasOwnProperty.call(req.file, 'originalname'))
+            if(Object.prototype.hasOwnProperty.call(req.file, 'originalname'))
             {
-                app.use('/static', express.static('./'+req.body.idUsuario));
-                const urlArchivo = 'http://localhost:'+puerto+'/static/'+req.file.originalname
+                const urlArchivo = 'http://localhost:'+getServerPort+'/static/'+req.file.originalname
                 const CUFactory = await factoryCU.crearCUFactory()
                 const cu = CUFactory.crearCU()
-                await cu.hacer(req.body.idUsuario,req.body.urlArchivo,'fedesteinberg@gmail.com')
+                await cu.hacer(urlArchivo, getMailAdmin)
             }
             else
             {
-                throw new Error('No se ha adjuntado el id del usuario o el archivo')
+                throw new crearErrorFaltaArchivo('No se ha adjuntado el archivo')
             }
 
         }
@@ -28,7 +28,7 @@ const crearNotificarAdminRouter = (puerto, rutaArchivo) => {
             throw new Error('Se ha producido un error: '+err)
         }
     })
-    
+
     return router
 };
 

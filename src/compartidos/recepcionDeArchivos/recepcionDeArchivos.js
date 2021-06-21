@@ -1,5 +1,6 @@
 import  multer from 'multer'
 import fs from 'fs'
+import {crearErrorCarpetaNoPudoCrearse} from '../../proyecto/errores/errorRuta.js'
 
 async function crearMiddleWare(rutaArchivos)
 {
@@ -31,7 +32,7 @@ async function crearDirectorio(ruta)
         else
         {
 
-            throw new Error('No se pudo crear la ruta: '+console.log(err.message))
+            throw new crearErrorCarpetaNoPudoCrearse('No se pudo crear la ruta')
         }
     }
 }
