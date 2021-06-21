@@ -1,4 +1,4 @@
-import CasoDeUso_AprobarRechazarSolicitud from './CU_AprobarRechazarSolicitud.js'
+import CasoDeUso_InformarEstadoSolicitud from './CU_InformarEstadoSolicitud.js'
 import MailerFactory from '../../../compartidos/MailerFactory.js'
 import QRFactory from '../../../compartidos/QRFactory.js'
 import { crearDaoLocal } from '../../persistencia/daoLocal.js'
@@ -10,8 +10,8 @@ const generadorQR = QRFactory.generadorQR('static')
 const daoLocal = crearDaoLocal()
 const daoSolicitud = crearDaoSolicitud()
 
-function crearCU_AprobarRechazarSolicitud () {
-    return new CasoDeUso_AprobarRechazarSolicitud(
+function crearCU_InformarEstadoSolicitud () {
+    return new CasoDeUso_InformarEstadoSolicitud(
         daoSolicitud,
         daoLocal,
         generadorQR,
@@ -19,4 +19,4 @@ function crearCU_AprobarRechazarSolicitud () {
     )
 }
     
-export default{ crearCU_AprobarRechazarSolicitud }
+export default{ crearCU_InformarEstadoSolicitud }
