@@ -7,6 +7,11 @@ function crearSolicitud(datos, id = null) {
 
     solicitud.id = nextId
 
+    if (!solicitud.urlArchivo) {
+        throw crearErrorDatosInvalidos('Falta la URL de la documentación')
+    } else {
+        solicitud.urlArchivo = datos.urlArchivo
+    }
 
     if (!solicitud.idLocal) {
         throw crearErrorDatosInvalidos('Falta el id del local')
