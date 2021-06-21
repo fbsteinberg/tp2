@@ -1,4 +1,4 @@
-import { crearSolicitud } from "../modelos/Solicitud"
+import { crearSolicitud } from "../modelos/Solicitud.js"
 
 const crearDaoSolicitud = () => {
     const solicitudes = [
