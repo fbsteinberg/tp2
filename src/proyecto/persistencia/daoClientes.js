@@ -4,7 +4,7 @@ import {crearErrorDatosNoEncontrados} from '../errores/errorDAO.js'
 const crearDaoClientes = async () => {
 
     const db = await crearClienteMongoDB().conectar()
-    const clientes = db.collection('solicitudes')
+    const clientes = db.collection('clientes')
 
     return {
         add: async (cliente) => {
