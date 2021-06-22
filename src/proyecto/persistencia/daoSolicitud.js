@@ -9,7 +9,7 @@ const crearDaoSolicitud = async () => {
 
     const daoSolicitud = {
         getByMail: async (mailSolicitud) => {
-            const solicitudBuscada =  await solicitudes.findOne({mail: mailSolicitud})
+            const solicitudBuscada =  await solicitudes.findOne({ mail: mailPropietario })
             if(!solicitudBuscada)
             {
                 throw new crearErrorDatosNoEncontrados('La solicitud buscada no existe')
@@ -18,7 +18,7 @@ const crearDaoSolicitud = async () => {
             return solicitudBuscada
         },
         guardarSolicitud : async (urlArchivo, mailPropietario) => {
-            const solicitudBuscada =  await solicitudes.findOne({mail: mailSolicitud})
+            const solicitudBuscada =  await solicitudes.findOne( { mail: mailPropietario })
             if(!solicitudBuscada)
             {
                 const nuevaSolicitud = {}

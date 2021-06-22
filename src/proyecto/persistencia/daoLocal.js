@@ -1,27 +1,17 @@
-const crearDaoLocal = () => {
-    const locales = [
-        {
-            id: 0,
-            nombre: 'Rapipago',
-            propietario: {
-                nombre:'Jose',
-                apellido:'perez',
-                email: 'joseperez@gmail.com',
-                password: 12345
-            },
-            cantidad: 30,
-            horarioMin: 12,
-            horarioMax: 18,
-            clientes: []
-        }
-    ];
+import {crearClienteMongoDB} from './mongoDB.js'
+import {crearErrorDatosNoEncontrados} from '../errores/errorDAO.js'
+
+const crearDaoLocal = async () => {
+
+    const db = await crearClienteMongoDB().conectar()
+    const locales = db.collection('locales')
 
     const daoLocal = {
         add: (local) => {
-            locales.push(local);
+            locales.insertOne(local);
         },
         addUnique: (local, claveUnica) => {
-            const existe = locales.some(e => e[claveUnica] === local[claveUnica]);
+            const existe = locales.find(e => e[claveUnica] === local[claveUnica]);
             if (existe) {
                 return { added: 0 };
             } else {

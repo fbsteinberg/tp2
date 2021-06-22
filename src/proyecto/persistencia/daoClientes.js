@@ -1,16 +1,14 @@
-const crearDaoClientes = () => {
-    const clientes = [
-        {
-            id: 0,
-            nombre: 'Lorem',
-            email: 'lorem@ipsum.com.ar',
-            dni: 39232133
-        }
-    ];
-  
+import {crearClienteMongoDB} from './mongoDB.js'
+import {crearErrorDatosNoEncontrados} from '../errores/errorDAO.js'
+
+const crearDaoClientes = async () => {
+
+    const db = await crearClienteMongoDB().conectar()
+    const clientes = db.collection('solicitudes')
+
     return {
         add: async (cliente) => {
-            clientes.push(cliente);
+            clientes.insertOne(cliente);
         },
         addUnique: (cliente, claveUnica) => {
             const existe = clientes.some(e => e[claveUnica] === cliente[claveUnica]);
@@ -29,5 +27,5 @@ const crearDaoClientes = () => {
         }
     }
 }
-  
+
 export { crearDaoClientes };
