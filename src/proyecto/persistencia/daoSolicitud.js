@@ -30,7 +30,7 @@ const crearDaoSolicitud = () => {
             }
             catch(e)
             {
-                console.log('error al crear la solicitud')
+                throw crearErrorDatosInvalidos('error al crear la solicitud: '+e.message)
             }
 
         }
