@@ -24,14 +24,8 @@ const crearDaoSolicitud = () => {
             nuevaSolicitud.id = 0
             nuevaSolicitud.idLocal = 0
             nuevaSolicitud.estado = 'enviado-administrador'
-            try{
-                const solicitudCreada = crearSolicitud(nuevaSolicitud)
-                return solicitudCreada
-            }
-            catch(e)
-            {
-                throw crearErrorDatosInvalidos('error al crear la solicitud: '+e.message)
-            }
+            const solicitudCreada = crearSolicitud(nuevaSolicitud)
+            return solicitudCreada
 
         }
     }
