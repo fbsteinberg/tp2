@@ -1,10 +1,10 @@
 import express from 'express';
 import factoryCU from '../negocio/CU_NotificarAdministrador/notificarAdministradorFactory.js';
 import factoryRA from '../../compartidos/recepcionDeArchivos/recepcionDeArchivosFactory.js';
-import { getServerPort, getMailAdmin } from '../../config.js'
+import { getServerPort, getMailAdmin, getRecepcionDeArchivosConfig } from '../../config.js'
 import { crearErrorFaltaArchivo } from '../errores/errorFaltaArchivo.js'
 
-const manejadorArchivos = await factoryRA.crearRecepcionDeArchivos()
+const manejadorArchivos = await factoryRA.crearRecepcionDeArchivos(getRecepcionDeArchivosConfig())
 
 const crearNotificarAdminRouter = () => {
     const router = express.Router();
