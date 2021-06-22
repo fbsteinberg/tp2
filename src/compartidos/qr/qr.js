@@ -1,4 +1,5 @@
 import QRCode from 'qrcode'
+import { getServerPort } from '../../config.js'
 
 function generarQR(ruta) {
     return {
@@ -14,6 +15,7 @@ function generarQR(ruta) {
                 }
                 QRCode.toFile(`${ruta}/${opciones.archivo}`, opciones.texto, opciones.visualizacion)
                 console.log(`QR Generado exitosamente en ${ruta}/${opciones.archivo}`)
+                return `http://localhost:${getServerPort()}/static/${opciones.archivo}`
             } catch (err) {
                 throw Error(`Ocurrió un error al general el QR. Detalles: ${err}`)
             }
