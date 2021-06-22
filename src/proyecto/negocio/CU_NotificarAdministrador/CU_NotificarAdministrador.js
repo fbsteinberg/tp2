@@ -7,8 +7,6 @@ class CasoDeUso_NotificarAdministrador
     }
     async hacer(urlArchivo, mailAdmin, mailPropietario)
     {
-
-
         //Generar enlace para acceder al documento
         const enlaceArchivo = '<a href='+urlArchivo+'>Aqui</a>'
 

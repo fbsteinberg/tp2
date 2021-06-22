@@ -14,7 +14,7 @@ const crearDaoSolicitud = () => {
 
         getById: (idSolicitud) => {
             console.log('solicitud encontrada!')
-            return { idSolicitud, idLocal:0, estado:'pendiente-rechazado', fechaSolicitud:'2021-05-02', motivoRechazo:'Información incompleta'}
+            return { idSolicitud, idLocal:0, estado:'pendiente-aprobacion', fechaSolicitud:'2021-05-02', motivoRechazo:'Información incompleta'}
         },
         guardarSolicitud : (urlArchivo, mailPropietario) => {
             const nuevaSolicitud = {}

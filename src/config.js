@@ -10,9 +10,10 @@ const getMailConfig = () => ({
 });
 
 const getRecepcionDeArchivosConfig = () => process.env.FILES_DIRECTORY;
+const getQRDirectoryConfig = () => process.env.QR_DIRECTORY;
 
 const getMailAdmin = () => process.env.MAIL_ADMIN;
 
 const getServerPort = () => process.env.SERVER_PORT || 3000;
 
-export { getMailConfig, getServerPort, getRecepcionDeArchivosConfig, getMailAdmin};
+export { getMailConfig, getServerPort, getRecepcionDeArchivosConfig, getQRDirectoryConfig, getMailAdmin};
