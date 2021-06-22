@@ -12,9 +12,9 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 function crearClienteMongoDB()
 {
     return {
-        conectar : async (dbName) => {
+        conectar : async () => {
             await client.connect()
-            const db = client.db(dbName)
+            const db = client.db(credentials.dbname)
             return db
         },
         desconectar : async () => {
