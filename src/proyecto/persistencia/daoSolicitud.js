@@ -8,8 +8,8 @@ const crearDaoSolicitud = async () => {
     const solicitudes = db.collection('solicitudes')
 
     const daoSolicitud = {
-        getByMail: async (mailSolicitud) => {
-            const solicitudBuscada =  await solicitudes.findOne({ mail: mailPropietario })
+        getById: async (idSolicitud) => {
+            const solicitudBuscada =  await solicitudes.findOne({ id: idSolicitud })
             if(!solicitudBuscada)
             {
                 throw new crearErrorDatosNoEncontrados('La solicitud buscada no existe')

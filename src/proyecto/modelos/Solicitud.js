@@ -1,7 +1,17 @@
 import { crearErrorDatosInvalidos } from '../errores/errorDatoInvalido.js'
 
-function crearSolicitud(datos) {
+let nextId = 1
+
+function crearSolicitud(datos, id = null) {
     const solicitud = {};
+
+    if (id) {
+        solicitud.id = Number(id);
+    } else if (!isNaN(Number(datos.id))) {
+        solicitud.id = Number(datos.id);
+    } else {
+        solicitud.id = nextId++;
+    }
 
     if(!datos.mailPropietario)
     {
