@@ -7,8 +7,8 @@ const crearDaoLocal = async () => {
     const locales = db.collection('locales')
 
     const daoLocal = {
-        add: (local) => {
-            locales.insertOne(local);
+        add: async (local) => {
+            await locales.insertOne(local);
         },
         addUnique: (local, claveUnica) => {
             const existe = locales.find(e => e[claveUnica] === local[claveUnica]);
