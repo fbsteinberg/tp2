@@ -16,7 +16,12 @@ const crearNotificarAdminRouter = () => {
                 const urlArchivo = `http://localhost:${getServerPort()}/static/${req.file.originalname}`
                 console.log(urlArchivo)
                 const mailPropietario = req.body.mail
-                const datosLocal = req.body.datosLocal
+                const datosLocal = {
+                    nombre: req.body.nombre,
+                    cantidad: req.body.cantidad,
+                    horarioMin: req.body.horarioMin,
+                    horarioMax: req.body.horarioMax
+                }
                 console.log(mailPropietario)
                 const CUFactory = await factoryCU.crearCUFactory()
                 const cu = await CUFactory.crearCU()

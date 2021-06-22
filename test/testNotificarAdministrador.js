@@ -11,7 +11,10 @@ await servidor.conectar(port);
 
 let data = new FormData();
 data.append('mail','lavina.dibbert42@ethereal.email')
-data.append('datosLocal',{nombre: 'g', cantidad:5, horarioMin: 1, horarioMax:7})
+data.append('nombre','g')
+data.append('cantidad',5)
+data.append('horarioMin',1)
+data.append('horarioMax',7)
 data.append('archivo', fs.createReadStream('./test/nombreDelArchivo.jpg'));
 const res = await axios.post(`http://localhost:${port}/api/notificar/cargarSolicitud`, data, {
     headers: {

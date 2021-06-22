@@ -2,16 +2,17 @@ import { crearErrorDatosInvalidos } from '../errores/errorDatoInvalido.js'
 
 let nextId = 1
 
-function crearSolicitud(datos, id = null) {
+function crearSolicitud(datos) {
     const solicitud = {};
 
-    if (id) {
-        solicitud.id = Number(id);
-    } else if (!isNaN(Number(datos.id))) {
-        solicitud.id = Number(datos.id);
-    } else {
-        solicitud.id = nextId++;
-    }
+    solicitud.id = datos.id
+    // if (id) {
+    //     solicitud.id = Number(id);
+    // } else if (!isNaN(Number(datos.id))) {
+    //     solicitud.id = Number(datos.id);
+    // } else {
+    //     solicitud.id = nextId++;
+    // }
 
     if(!datos.idLocal)
     {

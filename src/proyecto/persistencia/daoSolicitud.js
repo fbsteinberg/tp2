@@ -22,6 +22,8 @@ const crearDaoSolicitud = async () => {
             if(!solicitudBuscada)
             {
                 const nuevaSolicitud = {}
+                const ultimoId = solicitudes.find({}, 'id').sort({id:-1}).limit(1) 
+                nuevaSolicitud.id = ultimoId ? ultimoId++  : 0
                 nuevaSolicitud.idLocal = idLocal
                 nuevaSolicitud.mail = mailPropietario
                 nuevaSolicitud.urlArchivo = urlArchivo

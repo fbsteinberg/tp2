@@ -5,9 +5,9 @@ import {crearDaoLocal} from '../../persistencia/daoLocal.js'
 
 async function crearCUFactory()
 {
-    const daoSolicitud = crearDaoSolicitud()
+    const daoSolicitud = await crearDaoSolicitud()
     const generadorDeEmail = mailerFactory.crearMailer()
-    const daoLocal = crearDaoLocal()
+    const daoLocal = await crearDaoLocal()
 
     return {
         crearCU : () => {

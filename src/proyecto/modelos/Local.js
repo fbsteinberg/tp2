@@ -2,10 +2,12 @@ import { crearErrorDatosInvalidos } from '../errores/errorDatoInvalido.js'
 
 let nextId = 1
 
-function crearLocal(datos, id = null) {
+function crearLocal(datos) {
     const local = {
         clientes: []
     };
+
+    local.id = datos.id
 
     if (!datos.nombre) {
         throw crearErrorDatosInvalidos('Falta el nombre del local');
