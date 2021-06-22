@@ -11,7 +11,7 @@ const crearDaoLocal = async () => {
         add: async (local) => {
 
             const nuevoLocal = {}
-            const ultimoId = solicitudes.find({}, 'id').sort({id:-1}).limit(1)
+            let ultimoId = solicitudes.find({}, 'id').sort({id:-1}).limit(1)
             nuevoLocal.nombre = local.nombre
             nuevoLocal.cantidad = local.cantidad
             nuevoLocal.horarioMin = local.horarioMin
