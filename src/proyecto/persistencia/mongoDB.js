@@ -23,4 +23,4 @@ function crearClienteMongoDB()
     }
 }
 
-export default {crearClienteMongoDB}
+export  {crearClienteMongoDB}
