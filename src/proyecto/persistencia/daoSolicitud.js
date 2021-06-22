@@ -3,8 +3,10 @@ import {crearClienteMongoDB} from './mongoDB.js'
 import {crearErrorDatosNoEncontrados} from '../errores/errorDAO.js'
 
 const crearDaoSolicitud = async () => {
+
     const db = await crearClienteMongoDB().conectar()
     const solicitudes = db.collection('solicitudes')
+
     const daoSolicitud = {
         getByMail: async (mailSolicitud) => {
             const solicitudBuscada =  await solicitudes.findOne({mail: mailSolicitud})

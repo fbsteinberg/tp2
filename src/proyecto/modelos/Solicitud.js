@@ -1,11 +1,7 @@
 import { crearErrorDatosInvalidos } from '../errores/errorDatoInvalido.js'
 
-let nextId = 1
-
-function crearSolicitud(datos, id = null) {
+function crearSolicitud(datos) {
     const solicitud = {};
-
-    solicitud.id = nextId
 
     if(!datos.mailPropietario)
     {
@@ -30,14 +26,6 @@ function crearSolicitud(datos, id = null) {
         throw crearErrorDatosInvalidos('falta la fecha de la solicitud')
     } else {
         solicitud.dni = datos.fechaSolicitud;
-    }
-
-    if (id) {
-        solcitud.id = Number(id);
-    } else if (!isNaN(Number(datos.id))) {
-        solicitud.id = Number(datos.id);
-    } else {
-        solicitud.id = nextId++;
     }
 
     return solicitud;
