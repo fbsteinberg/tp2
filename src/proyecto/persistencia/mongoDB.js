@@ -5,7 +5,7 @@ const {MongoClient} = mongoDB
 
 const credentials = getMongoCredentials()
 
-const uri = `mongodb+srv://${credentials.username}:${credentials.password}>@cluster0.ifpg3.mongodb.net/${credentials.dbname}?retryWrites=true&w=majority`
+const uri = `mongodb+srv://${credentials.username}:<${credentials.password}>@cluster0.ifpg3.mongodb.net/${credentials.dbname}?retryWrites=true&w=majority`
 
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
