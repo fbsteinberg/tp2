@@ -16,4 +16,8 @@ const getMailAdmin = () => process.env.MAIL_ADMIN;
 
 const getServerPort = () => process.env.SERVER_PORT || 3000;
 
-export { getMailConfig, getServerPort, getRecepcionDeArchivosConfig, getQRDirectoryConfig, getMailAdmin};
+getMongoCredentials = () => {return {username: process.env.MONGODB_USERNAME, password: process.env.MONGODB_PASSWORD}}
+
+export { getMailConfig, getServerPort,
+     getRecepcionDeArchivosConfig, getQRDirectoryConfig,
+      getMailAdmin, getMongoCredentials};
