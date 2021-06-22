@@ -1,20 +1,19 @@
 import { crearSolicitud } from "../modelos/Solicitud.js"
+import {crearClienteMongoDB} from './mongoDB.js'
 
-const crearDaoSolicitud = () => {
-    const solicitudes = [
-        {
-            id: 0,
-            idLocal: 0,
-            urlArchivo: '',
-            estado: '',
-            fechaSolicitud: ''
-        }
-    ]
+const crearDaoSolicitud = async () => {
+    const db = await crearClienteMongoDB().conectar()
+    const solicitudes = db.collection('solicitudes')
     const daoSolicitud = {
+        getById: async (idSolicitud) => {
+            try{
+                return await solicitudes.findOne({id: idSolicitud})
+            }
+            catch(e)
+            {
 
-        getById: (idSolicitud) => {
-            console.log('solicitud encontrada!')
-            return { idSolicitud, idLocal:0, estado:'pendiente-aprobacion', fechaSolicitud:'2021-05-02', motivoRechazo:'Información incompleta'}
+            }
+
         },
         guardarSolicitud : (urlArchivo, mailPropietario) => {
             const nuevaSolicitud = {}
