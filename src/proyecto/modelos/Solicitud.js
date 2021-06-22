@@ -20,13 +20,6 @@ function crearSolicitud(datos, id = null) {
         solicitud.urlArchivo = datos.urlArchivo
     }
 
-    try{
-        solicitud.idLocal = datos.idLocal
-    }catch(err){
-        throw crearErrorDatosInvalidos('Falta el id del local')
-        }
-
-
     if (!datos.estado) {
         throw crearErrorDatosInvalidos('Falta el estado de la solicitud')
     } else {

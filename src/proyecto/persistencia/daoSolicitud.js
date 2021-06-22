@@ -21,7 +21,6 @@ const crearDaoSolicitud = async () => {
             nuevaSolicitud.urlArchivo = urlArchivo
             nuevaSolicitud.fechaSolicitud = Date.now()
             nuevaSolicitud.id = 0
-            nuevaSolicitud.idLocal = 0
             nuevaSolicitud.estado = 'enviado-administrador'
             const solicitudCreada = crearSolicitud(nuevaSolicitud)
             const solicitudGuardada = await solicitudes.insertOne(solicitudCreada)
