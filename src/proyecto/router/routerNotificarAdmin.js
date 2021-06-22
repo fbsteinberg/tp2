@@ -16,10 +16,11 @@ const crearNotificarAdminRouter = () => {
                 const urlArchivo = `http://localhost:${getServerPort()}/static/${req.file.originalname}`
                 console.log(urlArchivo)
                 const mailPropietario = req.body.mail
+                const datosLocal = req.body.datosLocal
                 console.log(mailPropietario)
                 const CUFactory = await factoryCU.crearCUFactory()
                 const cu = await CUFactory.crearCU()
-                await cu.hacer(urlArchivo, getMailAdmin(), mailPropietario)
+                await cu.hacer(urlArchivo, getMailAdmin(), mailPropietario, datosLocal)
             } else {
                 throw new crearErrorFaltaArchivo('No se ha adjuntado el archivo')
             }

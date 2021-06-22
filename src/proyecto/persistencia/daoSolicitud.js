@@ -17,11 +17,12 @@ const crearDaoSolicitud = async () => {
             delete solicitudBuscada._id
             return solicitudBuscada
         },
-        guardarSolicitud : async (urlArchivo, mailPropietario) => {
+        guardarSolicitud : async (urlArchivo, mailPropietario, idLocal) => {
             const solicitudBuscada =  await solicitudes.findOne( { mail: mailPropietario })
             if(!solicitudBuscada)
             {
                 const nuevaSolicitud = {}
+                nuevaSolicitud.idLocal = idLocal
                 nuevaSolicitud.mail = mailPropietario
                 nuevaSolicitud.urlArchivo = urlArchivo
                 nuevaSolicitud.fechaSolicitud = Date.now()

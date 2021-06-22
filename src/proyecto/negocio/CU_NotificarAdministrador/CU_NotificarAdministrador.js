@@ -1,16 +1,18 @@
 class CasoDeUso_NotificarAdministrador
 {
-    constructor(generadorDeEmail, daoSolicitud)
+    constructor(generadorDeEmail, daoSolicitud, daoLocal)
     {
         this.generadorDeEmail = generadorDeEmail
         this.daoSolicitud = daoSolicitud
+        this.daoLocal = daoLocal
     }
-    async hacer(urlArchivo, mailAdmin, mailPropietario)
+    async hacer(urlArchivo, mailAdmin, mailPropietario, datosLocal)
     {
         //Generar enlace para acceder al documento
         const enlaceArchivo = '<a href='+urlArchivo+'>Aqui</a>'
 
-        await this.daoSolicitud.guardarSolicitud(urlArchivo,mailPropietario)
+        const localCreado = await this.daoLocal.add(datosLocal)
+        await this.daoSolicitud.guardarSolicitud(urlArchivo,mailPropietario, localCreado.idLocal)
         //Enviar el mail al administrador
         const respuesta = await this.generadorDeEmail.sendEmail(mailAdmin, 'Solicitud Aprobación de Propietario',
         'Enlace a la documentación: '+enlaceArchivo +'. Mail propietario: '+mailPropietario);

@@ -13,6 +13,13 @@ function crearSolicitud(datos, id = null) {
         solicitud.id = nextId++;
     }
 
+    if(!datos.idLocal)
+    {
+        throw crearErrorDatosInvalidos('Falta el id del local')
+    } else {
+        solicitud.idLocal = datos.idLocal
+    }
+
     if(!datos.mailPropietario)
     {
         throw crearErrorDatosInvalidos('Falta el mail del propietario')
