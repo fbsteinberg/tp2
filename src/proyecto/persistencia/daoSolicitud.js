@@ -1,21 +1,21 @@
 import { crearSolicitud } from "../modelos/Solicitud.js"
 import {crearClienteMongoDB} from './mongoDB.js'
+import {crearErrorDatosNoEncontrados, crearErrorDatosNoInsertados} from '../errores/errorDAO.js'
 
 const crearDaoSolicitud = async () => {
     const db = await crearClienteMongoDB().conectar()
     const solicitudes = db.collection('solicitudes')
     const daoSolicitud = {
         getById: async (idSolicitud) => {
-            try{
-                return await solicitudes.findOne({id: idSolicitud})
-            }
-            catch(e)
-            {
-
-            }
-
+                const solicitudBuscada =  await solicitudes.findOne({id: idSolicitud})
+                if(!solicitudBuscada)
+                {
+                    throw new crearErrorDatosNoEncontrados('La solicitud buscada no existe')
+                }
+                delete solicitudBuscada._id
+                return solicitudBuscada
         },
-        guardarSolicitud : (urlArchivo, mailPropietario) => {
+        guardarSolicitud : async (urlArchivo, mailPropietario) => {
             const nuevaSolicitud = {}
             nuevaSolicitud.mailPropietario = mailPropietario
             nuevaSolicitud.urlArchivo = urlArchivo
@@ -24,8 +24,12 @@ const crearDaoSolicitud = async () => {
             nuevaSolicitud.idLocal = 0
             nuevaSolicitud.estado = 'enviado-administrador'
             const solicitudCreada = crearSolicitud(nuevaSolicitud)
-            return solicitudCreada
-
+            const solicitudGuardada = await solicitudes.insertOne(solicitudCreada)
+            if(!solicitudGuardada)
+            {
+                throw new crearErrorDatosNoInsertados('La solicitud generada no pudo ser guardada')
+            }
+            return solicitudGuardada
         }
     }
     return daoSolicitud

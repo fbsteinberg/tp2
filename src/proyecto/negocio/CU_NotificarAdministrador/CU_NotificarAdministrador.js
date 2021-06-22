@@ -10,17 +10,11 @@ class CasoDeUso_NotificarAdministrador
         //Generar enlace para acceder al documento
         const enlaceArchivo = '<a href='+urlArchivo+'>Aqui</a>'
 
-        try{
-            this.daoSolicitud.guardarSolicitud(urlArchivo,mailPropietario)
-            //Enviar el mail al administrador
-            const respuesta = await this.generadorDeEmail.sendEmail(mailAdmin, 'Solicitud Aprobación de Propietario',
-            'Enlace a la documentación: '+enlaceArchivo);
-            console.log('mail de nueva solicitud enviado al administrador ')
-        }
-        catch(e)
-        {
-            console.log(e)
-        }
+        await this.daoSolicitud.guardarSolicitud(urlArchivo,mailPropietario)
+        //Enviar el mail al administrador
+        const respuesta = await this.generadorDeEmail.sendEmail(mailAdmin, 'Solicitud Aprobación de Propietario',
+        'Enlace a la documentación: '+enlaceArchivo +'. Mail propietario: '+mailPropietario);
+        console.log('mail de nueva solicitud enviado al administrador ')
     }
 }
 
