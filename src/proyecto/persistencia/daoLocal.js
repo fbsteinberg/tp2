@@ -1,5 +1,5 @@
 import {crearClienteMongoDB} from './mongoDB.js'
-import {crearErrorDatosNoEncontrados} from '../errores/errorDAO.js'
+import {crearErrorDatosNoInsertados} from '../errores/errorDAO.js'
 import {crearLocal} from '../modelos/Local.js'
 
 const crearDaoLocal = async () => {
@@ -11,16 +11,18 @@ const crearDaoLocal = async () => {
         add: async (local) => {
 
             const nuevoLocal = {}
-            let ultimoId = solicitudes.find({}, 'id').sort({id:-1}).limit(1)
+            let ultimoId = locales.find({}, 'id').sort({id:-1}).limit(1)
             nuevoLocal.nombre = local.nombre
             nuevoLocal.cantidad = local.cantidad
             nuevoLocal.horarioMin = local.horarioMin
             nuevoLocal.horarioMax = local.horarioMax
-            nuevoLocal.id = ultimoId ? ultimoId++ : 0
+            nuevoLocal.id = 2//ultimoId ? ultimoId++ : 0
 
             const localCreado = await locales.insertOne(crearLocal(nuevoLocal))
-
-            return localCreado
+            if(localCreado){
+                return nuevoLocal
+            }
+            throw crearErrorDatosNoInsertados('No ha sido posible insertar el local')
         },
         addUnique: (local, claveUnica) => {
             const existe = locales.find(e => e[claveUnica] === local[claveUnica]);

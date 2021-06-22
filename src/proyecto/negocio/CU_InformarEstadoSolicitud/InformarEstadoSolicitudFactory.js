@@ -7,8 +7,8 @@ import { crearDaoSolicitud } from '../../persistencia/daoSolicitud.js'
 const enviadorDeMails = MailerFactory.crearMailer()
 const generadorQR = QRFactory.crearGeneradorQR('static')
 
-const daoLocal = crearDaoLocal()
-const daoSolicitud = crearDaoSolicitud()
+const daoLocal = await crearDaoLocal()
+const daoSolicitud = await crearDaoSolicitud()
 
 function crearCU_InformarEstadoSolicitud () {
     return new CasoDeUso_InformarEstadoSolicitud(

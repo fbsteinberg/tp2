@@ -4,8 +4,9 @@ let nextId = 1
 
 function crearSolicitud(datos) {
     const solicitud = {};
-
+    
     solicitud.id = datos.id
+    console.log(datos)
     // if (id) {
     //     solicitud.id = Number(id);
     // } else if (!isNaN(Number(datos.id))) {

@@ -33,13 +33,13 @@ function crearLocal(datos) {
         local.horarioMax = Number(datos.horarioMax);
     }
 
-    if (id) {
-        local.id = Number(id);
-    } else if (!isNaN(Number(datos.id))) {
-        local.id = Number(datos.id);
-    } else {
-        local.id = nextId++;
-    }
+    // if (id) {
+    //     local.id = Number(id);
+    // } else if (!isNaN(Number(datos.id))) {
+    //     local.id = Number(datos.id);
+    // } else {
+    //     local.id = nextId++;
+    // }
 
     return local;
 }
