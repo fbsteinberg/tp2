@@ -1,6 +1,6 @@
 import { crearSolicitud } from "../modelos/Solicitud.js"
 import {crearClienteMongoDB} from './mongoDB.js'
-import {crearErrorDatosNoEncontrados} from '../errores/errorDAO.js'
+import {crearErrorDatosNoEncontrados, crearErrorDatosNoInsertados} from '../errores/errorDAO.js'
 
 const crearDaoSolicitud = async () => {
 
@@ -29,6 +29,10 @@ const crearDaoSolicitud = async () => {
                 const solicitudCreada = crearSolicitud(nuevaSolicitud)
                 const solicitudGuardada = await solicitudes.insertOne(solicitudCreada)
                 return solicitudGuardada
+            }
+            else
+            {
+                throw new crearErrorDatosNoInsertados('Ya existe una solicitud con el mail que intenta usar')
             }
         }
     }
