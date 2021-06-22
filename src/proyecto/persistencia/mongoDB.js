@@ -21,5 +21,6 @@ function crearClienteMongoDB()
             await client.close()
         }
     }
-
 }
+
+export default {crearClienteMongoDB}
