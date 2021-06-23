@@ -11,7 +11,11 @@ await servidor.conectar(port);
 
 let data = new FormData();
 data.append('mail','lavina.dibbert42@ethereal.email')
-data.append('nombre','g')
+data.append('nombrePropietario','Jose' )
+data.append('apellido', 'perez')
+data.append('mail', 'joseperez@gmail.com')
+data.append('password', 12345)
+data.append('nombreLocal','g')
 data.append('cantidad',5)
 data.append('horarioMin',1)
 data.append('horarioMax',7)

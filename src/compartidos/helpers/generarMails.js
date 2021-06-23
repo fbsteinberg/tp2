@@ -1,7 +1,9 @@
 import fs from 'fs'
 
 async function generarMail(local, generadorQR, solicitud){
+    console.log(local)
     const propietario = local.propietario
+    
     let templateMail = solicitud.estado == 'pendiente-aprobacion' ? await generarMailAprobacion(local, generadorQR, solicitud) :await generarMailRechazo(solicitud)
     templateMail = templateMail.toString().replace('#APELLIDO_PROPIETARIO#', propietario.apellido).replace('#NOMBRE_PROPIETARIO#', propietario.nombre).replace('#ID_SOLICITUD#', solicitud.id).replace('#FECHA_SOLICITUD#', solicitud.fechaSolicitud).replace('#LOCAL#', local.nombre)
     return templateMail

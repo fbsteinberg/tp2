@@ -15,17 +15,23 @@ const crearNotificarAdminRouter = () => {
             if (Object.prototype.hasOwnProperty.call(req.file, 'originalname')) {
                 const urlArchivo = `http://localhost:${getServerPort()}/static/${req.file.originalname}`
                 console.log(urlArchivo)
-                const mailPropietario = req.body.mail
+                const datosPropietario = {
+                    mail:req.body.mail,
+                    nombre:req.body.nombrePropietario,
+                    apellido:req.body.apellido,
+                    password:req.body.password
+                }
+                
                 const datosLocal = {
-                    nombre: req.body.nombre,
+                    nombre: req.body.nombreLocal,
                     cantidad: req.body.cantidad,
                     horarioMin: req.body.horarioMin,
                     horarioMax: req.body.horarioMax
                 }
-                console.log(mailPropietario)
+                
                 const CUFactory = await factoryCU.crearCUFactory()
                 const cu = await CUFactory.crearCU()
-                await cu.hacer(urlArchivo, getMailAdmin(), mailPropietario, datosLocal)
+                await cu.hacer(urlArchivo, getMailAdmin(), datosPropietario, datosLocal)
             } else {
                 throw new crearErrorFaltaArchivo('No se ha adjuntado el archivo')
             }

@@ -7,6 +7,7 @@ const crearDaoSolicitud = async () => {
     const db = await crearClienteMongoDB().conectar()
     const solicitudes = db.collection('solicitudes')
 
+
     const daoSolicitud = {
         getById: async (idSolicitud) => {
             const solicitudBuscada =  await solicitudes.findOne({ "id" : Number(idSolicitud) })
@@ -18,11 +19,12 @@ const crearDaoSolicitud = async () => {
             return solicitudBuscada
         },
         guardarSolicitud : async (urlArchivo, mailPropietario, idLocal) => {
+            console.log(solicitudes)
             const solicitudBuscada =  await solicitudes.findOne( { mail: mailPropietario })
             if(!solicitudBuscada)
             {
                 const nuevaSolicitud = {}
-                let ultimoId = solicitudes.find({}).sort({_id:-1}).limit(1)
+                let ultimoId =  solicitudes.find({}).sort({_id:-1}).limit(1)
                 ultimoId = await ultimoId.next().id
                 nuevaSolicitud.id = ultimoId ? ultimoId++  : 0
                 nuevaSolicitud.idLocal = idLocal

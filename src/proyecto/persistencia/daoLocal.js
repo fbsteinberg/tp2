@@ -17,16 +17,22 @@ const crearDaoLocal = async () => {
             delete localBuscado._id
             return localBuscado
         },
-        add: async (local) => {
+        add: async (local, propietario) => {
 
             const nuevoLocal = {}
-            let ultimoId = solicitudes.find({}).sort({_id:-1}).limit(1)
+            let ultimoId =  solicitudes.find({}).sort({_id:-1}).limit(1)
             ultimoId = await ultimoId.next().id
             nuevoLocal.nombre = local.nombre
             nuevoLocal.cantidad = local.cantidad
             nuevoLocal.horarioMin = local.horarioMin
             nuevoLocal.horarioMax = local.horarioMax
             nuevoLocal.id = ultimoId ? ultimoId++ : 0
+            nuevoLocal.propietario = {
+                nombre:propietario.nombre,
+                apellido:propietario.apellido,
+                mail:propietario.mail,
+                password:propietario.password
+            }
 
             const localCreado = await locales.insertOne(crearLocal(nuevoLocal))
             if(localCreado){
