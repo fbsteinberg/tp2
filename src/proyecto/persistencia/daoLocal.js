@@ -39,8 +39,10 @@ const crearDaoLocal = async () => {
             throw crearErrorDatosNoInsertados('No ha sido posible insertar el local')
         },
         addClient: async (id, cliente) => {
-            const status = await locales.update({ "id" : Number(id) }, { $push: { "clientes": cliente } });
-            console.log(status)
+            const status = await locales.updateOne({ "id" : Number(id) }, { $push: { "clientes": cliente } });
+            if(status?.result?.nModified === 0){
+                throw crearErrorDatosNoInsertados('No ha sido posible insertar el cliente en el local')
+            }
         }
     }
 

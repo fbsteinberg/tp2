@@ -12,7 +12,7 @@ const crearServidor = () => {
     app.use('/static', express.static(getQRDirectoryConfig()));
 
     app.use('/api/cola', routerColaClientes.crearColaClientesRouter());
-    app.use('/api/solicitudes', routerSolicitudes);
+    app.use('/api/solicitudes', routerSolicitudes.crearSolicitudesRouter());
     app.use('/api/notificar', routerNotificarAdmin.crearNotificarAdminRouter());
 
     let server = null;

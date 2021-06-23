@@ -1,9 +1,9 @@
 import express from 'express'
 import CUFactory from '../negocio/CU_InformarEstadoSolicitud/InformarEstadoSolicitudFactory.js'
 
-const router = express.Router()
-
 const crearSolicitudesRouter = () => {
+  const router = express.Router()
+
   router.post('/:idSolicitud', async (req, res, next) => {
     try {
       const crearCU_InformarEstadoSolicitud = CUFactory.crearCU_InformarEstadoSolicitud()
@@ -27,6 +27,8 @@ const crearSolicitudesRouter = () => {
 
     res.json({ message: error.message });
   });
+
+  return router
 }
 
 export default { crearSolicitudesRouter }
