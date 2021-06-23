@@ -1,6 +1,6 @@
-import {crearClienteMongoDB} from './mongoDB.js'
-import {crearErrorDatosNoInsertados} from '../errores/errorDAO.js'
 import {crearLocal} from '../modelos/Local.js'
+import {crearClienteMongoDB} from './mongoDB.js'
+import {crearErrorDatosNoInsertados, crearErrorDatosNoEncontrados} from '../errores/errorDAO.js'
 
 const crearDaoLocal = async () => {
 
@@ -8,15 +8,25 @@ const crearDaoLocal = async () => {
     const locales = db.collection('locales')
 
     const daoLocal = {
+        getById: async (id) => {
+            const localBuscado =  await locales.findOne({ "id" : Number(id) })
+            if(!localBuscado)
+            {
+                throw new crearErrorDatosNoEncontrados('El local buscado no existe')
+            }
+            delete localBuscado._id
+            return localBuscado
+        },
         add: async (local) => {
 
             const nuevoLocal = {}
-            let ultimoId = locales.find({}, 'id').sort({id:-1}).limit(1)
+            let ultimoId = solicitudes.find({}).sort({_id:-1}).limit(1)
+            ultimoId = await ultimoId.next().id
             nuevoLocal.nombre = local.nombre
             nuevoLocal.cantidad = local.cantidad
             nuevoLocal.horarioMin = local.horarioMin
             nuevoLocal.horarioMax = local.horarioMax
-            nuevoLocal.id = 2//ultimoId ? ultimoId++ : 0
+            nuevoLocal.id = ultimoId ? ultimoId++ : 0
 
             const localCreado = await locales.insertOne(crearLocal(nuevoLocal))
             if(localCreado){
@@ -32,9 +42,6 @@ const crearDaoLocal = async () => {
                 locales.push(local);
                 return { added: 1 };
             }
-        },
-        getById: (id) => {
-            return locales.find(e => e.id === id);
         },
         addClient: (id, cliente) => {
             const index = locales.findIndex(e => e.id == id);

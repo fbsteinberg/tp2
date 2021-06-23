@@ -9,7 +9,6 @@ class CU_InformarEstadoSolicitud {
     }
 
     async validar(idSolicitud){
-        console.log
         const solicitud = await this.daoSolicitud.getById(idSolicitud)
         const local = await this.daoLocal.getById(solicitud.idLocal)
         const propietario = local.propietario

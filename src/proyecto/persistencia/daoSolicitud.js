@@ -9,7 +9,7 @@ const crearDaoSolicitud = async () => {
 
     const daoSolicitud = {
         getById: async (idSolicitud) => {
-            const solicitudBuscada =  await solicitudes.findOne({ id: idSolicitud })
+            const solicitudBuscada =  await solicitudes.findOne({ "id" : Number(idSolicitud) })
             if(!solicitudBuscada)
             {
                 throw new crearErrorDatosNoEncontrados('La solicitud buscada no existe')
@@ -22,11 +22,11 @@ const crearDaoSolicitud = async () => {
             if(!solicitudBuscada)
             {
                 const nuevaSolicitud = {}
-                let ultimoId = solicitudes.aggregate([{$max:'id'}])
-                console.log(ultimoId.s[1])
+                let ultimoId = solicitudes.find({}).sort({_id:-1}).limit(1)
+                ultimoId = await ultimoId.next().id
                 nuevaSolicitud.id = ultimoId ? ultimoId++  : 0
                 nuevaSolicitud.idLocal = idLocal
-                nuevaSolicitud.mail = mailPropietario
+                nuevaSolicitud.mailPropietario = mailPropietario
                 nuevaSolicitud.urlArchivo = urlArchivo
                 nuevaSolicitud.fechaSolicitud = Date.now()
                 nuevaSolicitud.estado = 'enviado-administrador'

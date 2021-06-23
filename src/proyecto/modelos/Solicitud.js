@@ -1,12 +1,9 @@
 import { crearErrorDatosInvalidos } from '../errores/errorDatoInvalido.js'
 
-let nextId = 1
-
 function crearSolicitud(datos) {
     const solicitud = {};
     
     solicitud.id = datos.id
-    console.log(datos)
     // if (id) {
     //     solicitud.id = Number(id);
     // } else if (!isNaN(Number(datos.id))) {
@@ -44,7 +41,7 @@ function crearSolicitud(datos) {
     if (!datos.fechaSolicitud) {
         throw crearErrorDatosInvalidos('falta la fecha de la solicitud')
     } else {
-        solicitud.dni = datos.fechaSolicitud;
+        solicitud.fechaSolicitud = datos.fechaSolicitud;
     }
 
     return solicitud;
