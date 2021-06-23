@@ -13,7 +13,7 @@ class CU_InformarEstadoSolicitud {
         const local = await this.daoLocal.getById(solicitud.idLocal)
         const propietario = local.propietario
         const mail = await generarMail(local, this.generadorQR, solicitud)
-        await this.enviadorDeMails.sendEmail(propietario.email.toString(), 'Estado de su solicitud', mail)
+        await this.enviadorDeMails.sendEmail(propietario.mail, 'Estado de su solicitud', mail)
     }
 }
 

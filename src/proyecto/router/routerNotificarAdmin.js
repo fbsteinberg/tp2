@@ -10,7 +10,7 @@ const manejadorArchivos = await factoryRA.crearRecepcionDeArchivos(getRecepcionD
 const crearNotificarAdminRouter = () => {
     const router = express.Router();
 
-    router.post('/cargarSolicitud', manejadorArchivos.single('archivo'), async (req,res) => {
+    router.post('/cargarSolicitud', manejadorArchivos.single('archivo'), async (req, res, next) => {
         try {
             if (Object.prototype.hasOwnProperty.call(req.file, 'originalname')) {
                 const urlArchivo = `http://localhost:${getServerPort()}/static/${req.file.originalname}`
@@ -36,10 +36,24 @@ const crearNotificarAdminRouter = () => {
                 throw new crearErrorFaltaArchivo('No se ha adjuntado el archivo')
             }
         } catch(err) {
-            throw new Error(`Se ha producido un error: ${err}`)
+            next(error);
         }
     })
 
+    router.use((error, req, res, next) => {
+        switch(error.type) {
+            case 'ERROR_DATOS_INVALIDOS':
+            case 'ERROR_DATOS_FALTANTES':
+              res.status(400);
+            case 'ERROR_DATOS_NO_ENCONTRADOS':
+              res.status(404)
+            default:
+              res.status(500);
+        }
+    
+        res.json({ message: error.message });
+    });
+    
     return router
 };
 

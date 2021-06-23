@@ -1,7 +1,6 @@
 import fs from 'fs'
 
 async function generarMail(local, generadorQR, solicitud){
-    console.log(local)
     const propietario = local.propietario
     
     let templateMail = solicitud.estado == 'pendiente-aprobacion' ? await generarMailAprobacion(local, generadorQR, solicitud) :await generarMailRechazo(solicitud)

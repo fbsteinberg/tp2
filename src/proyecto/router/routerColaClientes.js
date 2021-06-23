@@ -16,10 +16,14 @@ const crearColaClientesRouter = () => {
     });
     
     router.use((error, req, res, next) => {
-        if (error.type === 'ERROR_DATOS_INVALIDOS') {
-          res.status(400);
-        } else {
-          res.status(500);
+        switch(error.type) {
+            case 'ERROR_DATOS_INVALIDOS':
+            case 'ERROR_DATOS_FALTANTES':
+              res.status(400);
+            case 'ERROR_DATOS_NO_ENCONTRADOS':
+              res.status(404)
+            default:
+              res.status(500);
         }
     
         res.json({ message: error.message });
