@@ -10,7 +10,6 @@ const port = getServerPort();
 await servidor.conectar(port);
 
 let data = new FormData();
-data.append('mail','lavina.dibbert42@ethereal.email')
 data.append('nombrePropietario','Jose' )
 data.append('apellido', 'perez')
 data.append('mail', 'joseperez@gmail.com')

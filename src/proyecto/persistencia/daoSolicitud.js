@@ -3,10 +3,8 @@ import {crearClienteMongoDB} from './mongoDB.js'
 import {crearErrorDatosNoEncontrados, crearErrorDatosNoInsertados} from '../errores/errorDAO.js'
 
 const crearDaoSolicitud = async () => {
-
     const db = await crearClienteMongoDB().conectar()
     const solicitudes = db.collection('solicitudes')
-
 
     const daoSolicitud = {
         getById: async (idSolicitud) => {
@@ -19,7 +17,6 @@ const crearDaoSolicitud = async () => {
             return solicitudBuscada
         },
         guardarSolicitud : async (urlArchivo, mailPropietario, idLocal) => {
-            console.log(solicitudes)
             const solicitudBuscada =  await solicitudes.findOne( { mail: mailPropietario })
             if(!solicitudBuscada)
             {

@@ -12,7 +12,7 @@ function crearSolicitud(datos) {
     //     solicitud.id = nextId++;
     // }
 
-    if(!datos.idLocal)
+    if(!datos.id && isNaN(datos.id))
     {
         throw crearErrorDatosInvalidos('Falta el id del local')
     } else {

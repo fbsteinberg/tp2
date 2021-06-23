@@ -18,9 +18,8 @@ const crearDaoLocal = async () => {
             return localBuscado
         },
         add: async (local, propietario) => {
-
             const nuevoLocal = {}
-            let ultimoId =  solicitudes.find({}).sort({_id:-1}).limit(1)
+            let ultimoId =  locales.find({}).sort({_id:-1}).limit(1)
             ultimoId = await ultimoId.next().id
             nuevoLocal.nombre = local.nombre
             nuevoLocal.cantidad = local.cantidad

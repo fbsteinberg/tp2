@@ -5,10 +5,9 @@ import { crearDaoLocal } from '../../persistencia/daoLocal.js';
 
 const daoClientes = crearDaoClientes();
 const daoLocal = crearDaoLocal();
+const enviadorMail = mailerFactory.crearMailer();
 
 const crearEncolarClientes = async () => {
-    const enviadorMail = mailerFactory.crearMailer();
-    
     const casoUsoEncolarClientes = generarEncolarCliente(
         daoClientes,
         daoLocal,
