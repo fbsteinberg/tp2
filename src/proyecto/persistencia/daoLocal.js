@@ -9,9 +9,9 @@ const crearDaoLocal = async () => {
 
     const daoLocal = {
         getById: async (id) => {
-            const localBuscado =  await locales.findOne({ "id" : Number(id) })
-            if(!localBuscado)
-            {
+            console.log(id)
+            const localBuscado = await locales.findOne({ "id" : Number(id) })
+            if (!localBuscado) {
                 throw new crearErrorDatosNoEncontrados('El local buscado no existe')
             }
             delete localBuscado._id
@@ -19,13 +19,13 @@ const crearDaoLocal = async () => {
         },
         add: async (local, propietario) => {
             const nuevoLocal = {}
-            let ultimoId =  locales.find({}).sort({_id:-1}).limit(1)
-            ultimoId = await ultimoId.next().id
+            let cursorLastLocal = await locales.find({}).sort( { id: -1 } ).limit(1)
+            cursorLastLocal = await cursorLastLocal.next()
+            nuevoLocal.id = typeof cursorLastLocal?.id !== 'null' ? cursorLastLocal?.id + 1 : 0
             nuevoLocal.nombre = local.nombre
             nuevoLocal.cantidad = local.cantidad
             nuevoLocal.horarioMin = local.horarioMin
             nuevoLocal.horarioMax = local.horarioMax
-            nuevoLocal.id = ultimoId ? ultimoId++ : 0
             nuevoLocal.propietario = {
                 nombre:propietario.nombre,
                 apellido:propietario.apellido,
@@ -39,32 +39,9 @@ const crearDaoLocal = async () => {
             }
             throw crearErrorDatosNoInsertados('No ha sido posible insertar el local')
         },
-        addUnique: (local, claveUnica) => {
-            const existe = locales.find(e => e[claveUnica] === local[claveUnica]);
-            if (existe) {
-                return { added: 0 };
-            } else {
-                locales.push(local);
-                return { added: 1 };
-            }
-        },
-        addClient: (id, cliente) => {
-            const index = locales.findIndex(e => e.id == id);
-            if (index === -1) {
-                return { updated: 0 };
-            } else {
-                locales[index].clientes.push(cliente);
-                return { updated: 1 };
-            }
-        },
-        removeFirstClient: (id) => {
-            const index = locales.findIndex(e => e.id == id);
-            if (index === -1) {
-                return { updated: 0 };
-            } else {
-                locales[index].clientes.shift();
-                return { updated: 1 };
-            }
+        addClient: async (id, cliente) => {
+            const status = await locales.update({ "id" : Number(id) }, { $push: { "clientes": cliente } });
+            console.log(status)
         }
     }
 

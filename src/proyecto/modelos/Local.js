@@ -1,7 +1,5 @@
 import { crearErrorDatosInvalidos } from '../errores/errorDatoInvalido.js'
 
-let nextId = 1
-
 function crearLocal(datos) {
     const local = {
         clientes: []
@@ -32,14 +30,6 @@ function crearLocal(datos) {
     } else {
         local.horarioMax = Number(datos.horarioMax);
     }
-
-    // if (id) {
-    //     local.id = Number(id);
-    // } else if (!isNaN(Number(datos.id))) {
-    //     local.id = Number(datos.id);
-    // } else {
-    //     local.id = nextId++;
-    // }
 
     return local;
 }

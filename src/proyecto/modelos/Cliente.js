@@ -1,9 +1,9 @@
 import { crearErrorDatosInvalidos } from '../errores/errorDatoInvalido.js'
 
-let nextId = 1;
-
-function crearCliente(datos, id = null) {
+function crearCliente(datos) {
     const cliente = {};
+
+    cliente.id = datos.id;
 
     if (!datos.nombre) {
         throw crearErrorDatosInvalidos('Falta el nombre del cliente')
@@ -21,14 +21,6 @@ function crearCliente(datos, id = null) {
         throw crearErrorDatosInvalidos('falta el dni')
     } else {
         cliente.dni = datos.dni;
-    }
-
-    if (id) {
-        cliente.id = Number(id);
-    } else if (!isNaN(Number(datos.id))) {
-        cliente.id = Number(datos.id);
-    } else {
-        cliente.id = nextId++;
     }
 
     return cliente;

@@ -7,23 +7,21 @@ const crearDaoClientes = async () => {
     const clientes = db.collection('clientes')
 
     return {
-        add: async (cliente) => {
-            clientes.insertOne(cliente);
-        },
-        addUnique: (cliente, claveUnica) => {
-            const existe = clientes.some(e => e[claveUnica] === cliente[claveUnica]);
-            if (existe) {
-                return { added: 0 };
-            } else {
-                clientes.push(cliente);
-                return { added: 1 };
-            }
-        },
         getById: async (id) => {
-            return clientes.find(e => e.id === id);
+            const clienteBuscado = await clientes.findOne({ "id" : Number(id) })
+            if (!clienteBuscado) {
+                throw new crearErrorDatosNoEncontrados('El cliente buscado no existe')
+            }
+            delete clienteBuscado._id
+            return clienteBuscado
         },
         getByDni: async (dni) => {
-            return clientes.find(e => e.dni === dni);
+            const clienteBuscado = await clientes.findOne({ "dni" : Number(dni) })
+            if (!clienteBuscado) {
+                throw new crearErrorDatosNoEncontrados('El cliente buscado no existe')
+            }
+            delete clienteBuscado._id
+            return clienteBuscado
         }
     }
 }

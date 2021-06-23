@@ -4,13 +4,6 @@ function crearSolicitud(datos) {
     const solicitud = {};
     
     solicitud.id = datos.id
-    // if (id) {
-    //     solicitud.id = Number(id);
-    // } else if (!isNaN(Number(datos.id))) {
-    //     solicitud.id = Number(datos.id);
-    // } else {
-    //     solicitud.id = nextId++;
-    // }
 
     if(!datos.id && isNaN(datos.id))
     {
