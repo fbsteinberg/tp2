@@ -3,15 +3,11 @@ import routerColaClientes from '../../proyecto/router/routerColaClientes.js';
 import routerSolicitudes from '../../proyecto/router/routerSolicitudes.js';
 import { getRecepcionDeArchivosConfig, getQRDirectoryConfig } from '../../config.js';
 
-import swaggerUi from 'swagger-ui-express'
-import swaggerFile from './swagger_output.json'
-require('./endpoints')(app)
 
 const crearServidor = () => {
     const app = express();
 
     app.use(express.json());
-    app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile))
     app.use('/static', express.static(getRecepcionDeArchivosConfig()));
     app.use('/static', express.static(getQRDirectoryConfig()));
     app.use('/api/cola', routerColaClientes.crearColaClientesRouter());
