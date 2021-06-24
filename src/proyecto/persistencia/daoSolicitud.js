@@ -10,7 +10,7 @@ const crearDaoSolicitud = async () => {
             const solicitudBuscada =  await solicitudes.findOne({ "id" : Number(idSolicitud) })
             if(!solicitudBuscada)
             {
-                throw new crearErrorDatosNoEncontrados('La solicitud buscada no existe')
+                throw  crearErrorDatosNoEncontrados('La solicitud buscada no existe')
             }
             delete solicitudBuscada._id
             return solicitudBuscada

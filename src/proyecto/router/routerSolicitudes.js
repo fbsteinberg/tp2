@@ -43,10 +43,10 @@ const crearSolicitudesRouter = () => {
             const cu = await CUFactory.crearCU()
             await cu.hacer(urlArchivo, getMailAdmin(), datosPropietario, datosLocal)
         } else {
-            throw new crearErrorFaltaArchivo('No se ha adjuntado el archivo')
+            throw crearErrorFaltaArchivo('No se ha adjuntado el archivo')
         }
     } catch(err) {
-        next(error);
+        next(err);
     }
 })
 

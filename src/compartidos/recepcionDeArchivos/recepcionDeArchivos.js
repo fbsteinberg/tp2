@@ -32,7 +32,7 @@ async function crearDirectorio(ruta)
         else
         {
 
-            throw new crearErrorCarpetaNoPudoCrearse('No se pudo crear la ruta')
+            throw crearErrorCarpetaNoPudoCrearse('No se pudo crear la ruta')
         }
     }
 }

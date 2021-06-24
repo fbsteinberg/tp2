@@ -11,7 +11,7 @@ const crearDaoLocal = async () => {
         getById: async (id) => {
             const localBuscado = await locales.findOne({ "id" : Number(id) })
             if (!localBuscado) {
-                throw new crearErrorDatosNoEncontrados('El local buscado no existe')
+                throw crearErrorDatosNoEncontrados('El local buscado no existe')
             }
             delete localBuscado._id
             return localBuscado
