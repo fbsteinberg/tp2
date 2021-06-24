@@ -4,6 +4,8 @@ import fs from 'fs'
 import { crearServidor } from '../src/compartidos/servidor/servidor.js'
 import { getServerPort } from '../src/config.js'
 
+try{
+  
 const servidor = crearServidor();
 
 const port = getServerPort();
@@ -12,7 +14,7 @@ await servidor.conectar(port);
 let data = new FormData();
 data.append('nombrePropietario','Jose' )
 data.append('apellido', 'perez')
-data.append('mail', 'joseperez3@gmail.com')
+data.append('mail', 'joseperez9@gmail.com')
 data.append('password', 12345)
 data.append('nombreLocal','g')
 data.append('cantidad',5)
@@ -28,6 +30,13 @@ const res = await axios.post(`http://localhost:${port}/api/solicitudes/`, data, 
 })
 
 await servidor.desconectar();
+
+}
+catch(e)
+{
+  console.log(e)
+}
+
 
 
 

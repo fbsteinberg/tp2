@@ -1,4 +1,5 @@
 import fs from 'fs'
+import {getServerPort} from '../../config.js'
 
 async function generarMail(local, generadorQR, solicitud){
     const propietario = local.propietario
@@ -13,7 +14,7 @@ async function generarMailAprobacion(local, generadorQR, solicitud){
     let mailAprobacion = await fs.promises.readFile('mail_templates/solicitudAceptada.html')
     const QR = await generadorQR.generar({
         archivo: `${local.nombre}.png`,
-        texto: `https://localhost:3000/api/usuarios/unirseACola?local=${solicitud.idLocal}` ,
+        texto: `https://localhost:${getServerPort()}/api/usuarios/unirseACola?local=${solicitud.idLocal}` ,
         ancho: 600,
         margen: 2, 
         colorQR: '#34ebb1',

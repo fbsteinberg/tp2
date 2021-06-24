@@ -16,15 +16,15 @@ class CasoDeUso_NotificarAdministrador
 
         const nuevoLocal = {}
         nuevoLocal.nombre = datosLocal.nombre
-            nuevoLocal.cantidad = datosLocal.cantidad
-            nuevoLocal.horarioMin = datosLocal.horarioMin
-            nuevoLocal.horarioMax = datosLocal.horarioMax
-            nuevoLocal.propietario = {
-                nombre:datosPropietario.nombre,
-                apellido:datosPropietario.apellido,
-                mail:datosPropietario.mail,
-                password:datosPropietario.password
-            }
+        nuevoLocal.cantidad = datosLocal.cantidad
+        nuevoLocal.horarioMin = datosLocal.horarioMin
+        nuevoLocal.horarioMax = datosLocal.horarioMax
+        nuevoLocal.propietario = {
+            nombre:datosPropietario.nombre,
+            apellido:datosPropietario.apellido,
+            mail:datosPropietario.mail,
+            password:datosPropietario.password
+        }
         const localCreado = await this.daoLocal.add(nuevoLocal)
 
         const nuevaSolicitud = {}
@@ -36,10 +36,9 @@ class CasoDeUso_NotificarAdministrador
         await this.daoSolicitud.guardarSolicitud(nuevaSolicitud)
 
         //Enviar el mail al administrador
-        const respuesta = await this.generadorDeEmail.sendEmail(mailAdmin, 'Solicitud Aprobación de Propietario',
-        'Enlace a la documentación: '+enlaceArchivo +'. Mail propietario: '+localCreado.propietario.mail);
+        await this.generadorDeEmail.sendEmail(mailAdmin, 'Solicitud Aprobación de Propietario', 'Enlace a la documentación: '+enlaceArchivo +'. Mail propietario: '+localCreado.propietario.mail);
         console.log('mail de nueva solicitud enviado al administrador ')
-        
+
     }
 }
 

@@ -25,13 +25,8 @@ async function crearDirectorio(ruta)
     }
     catch(err)
     {
-        if(err.code == 'ENOENT' || err.code == 'EEXIST')
+        if(err.code != 'ENOENT' && err.code != 'EEXIST')
         {
-            //console.log('La ruta ya existe')
-        }
-        else
-        {
-
             throw crearErrorCarpetaNoPudoCrearse('No se pudo crear la ruta')
         }
     }

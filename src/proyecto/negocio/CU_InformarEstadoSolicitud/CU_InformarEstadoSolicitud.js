@@ -14,6 +14,12 @@ class CU_InformarEstadoSolicitud {
         const propietario = local.propietario
         const mail = await generarMail(local, this.generadorQR, solicitud)
         await this.enviadorDeMails.sendEmail(propietario.mail, 'Estado de su solicitud', mail)
+        if(solicitud.estado=='pendiente-aprobacion'){
+            solicitud.estado='aprobado'
+        }else{
+            solicitud.estado='rechazado'
+        }
+        this.daoSolicitud.actualizarEstadoSolicitud(solicitud)
     }
 }
 
