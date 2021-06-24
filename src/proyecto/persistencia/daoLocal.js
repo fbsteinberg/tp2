@@ -22,7 +22,7 @@ const crearDaoLocal = async () => {
             cursorLastLocal = await cursorLastLocal.next()
             nuevoLocal.id = typeof cursorLastLocal?.id !== 'null' ? cursorLastLocal?.id + 1 : 0
             const localCreado = crearLocal(nuevoLocal)
-            const localInsertado = await locales.insertOne(localCreado)
+            await locales.insertOne(localCreado)
             if(localCreado){
                 return localCreado
             }

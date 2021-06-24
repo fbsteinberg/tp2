@@ -36,6 +36,7 @@ const crearDaoSolicitud = async () => {
             if(status?.result?.nModified === 0){
                 throw crearErrorDatosNoInsertados('No ha sido posible actualizar el estado de la solicitud')
             }
+            console.log("Estado de solicitud actualizado correctamente")
         }
     }
     return daoSolicitud
