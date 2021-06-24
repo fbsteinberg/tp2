@@ -16,8 +16,7 @@ const crearDaoSolicitud = async () => {
             return solicitudBuscada
         },
         guardarSolicitud : async (nuevaSolicitud) => {
-            const solicitudBuscada =  await solicitudes.findOne( { mail: nuevaSolicitud.mailPropietario })
-
+            const solicitudBuscada =  await solicitudes.findOne( { mailPropietario: nuevaSolicitud.mailPropietario })
             if(!solicitudBuscada)
             {
                 
