@@ -1,20 +1,22 @@
 import express from 'express';
 import routerColaClientes from '../../proyecto/router/routerColaClientes.js';
 import routerSolicitudes from '../../proyecto/router/routerSolicitudes.js';
-import routerNotificarAdmin from '../../proyecto/router/routerNotificarAdmin.js';
 import { getRecepcionDeArchivosConfig, getQRDirectoryConfig } from '../../config.js';
+
+const swaggerUi = require('swagger-ui-express')
+const swaggerFile = require('./swagger_output.json')
+require('./endpoints')(app)
 
 const crearServidor = () => {
     const app = express();
 
     app.use(express.json());
+    app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile))
     app.use('/static', express.static(getRecepcionDeArchivosConfig()));
     app.use('/static', express.static(getQRDirectoryConfig()));
-
     app.use('/api/cola', routerColaClientes.crearColaClientesRouter());
     app.use('/api/solicitudes', routerSolicitudes.crearSolicitudesRouter());
-    app.use('/api/notificar', routerNotificarAdmin.crearNotificarAdminRouter());
-
+    
     let server = null;
 
     return {
