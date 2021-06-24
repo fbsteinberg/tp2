@@ -2,10 +2,35 @@ import { crearErrorDatosInvalidos } from '../errores/errorDatoInvalido.js'
 
 function crearLocal(datos) {
     const local = {
-        clientes: []
+        propietario : {},  clientes: []
     };
 
     local.id = datos.id
+
+
+    if (!datos.propietario.nombre) {
+        throw crearErrorDatosInvalidos('Falta el nombre del propietario');
+    } else {
+        local.propietario.nombre = datos.propietario.nombre;
+    }
+
+    if (!datos.propietario.apellido) {
+        throw crearErrorDatosInvalidos('Falta el apellido del propietario');
+    } else {
+        local.propietario.apellido = datos.propietario.apellido;
+    }
+
+    if (!datos.propietario.mail) {
+        throw crearErrorDatosInvalidos('Falta el mail del propietario');
+    } else {
+        local.propietario.mail = datos.propietario.mail;
+    }
+
+    if (!datos.propietario.password) {
+        throw crearErrorDatosInvalidos('Falta el mail del propietario');
+    } else {
+        local.propietario.password = datos.propietario.password;
+    }
 
     if (!datos.nombre) {
         throw crearErrorDatosInvalidos('Falta el nombre del local');

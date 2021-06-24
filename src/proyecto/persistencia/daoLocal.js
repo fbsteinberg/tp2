@@ -16,25 +16,15 @@ const crearDaoLocal = async () => {
             delete localBuscado._id
             return localBuscado
         },
-        add: async (local, propietario) => {
-            const nuevoLocal = {}
+        add: async (nuevoLocal) => {
+            
             let cursorLastLocal = await locales.find({}).sort( { id: -1 } ).limit(1)
             cursorLastLocal = await cursorLastLocal.next()
             nuevoLocal.id = typeof cursorLastLocal?.id !== 'null' ? cursorLastLocal?.id + 1 : 0
-            nuevoLocal.nombre = local.nombre
-            nuevoLocal.cantidad = local.cantidad
-            nuevoLocal.horarioMin = local.horarioMin
-            nuevoLocal.horarioMax = local.horarioMax
-            nuevoLocal.propietario = {
-                nombre:propietario.nombre,
-                apellido:propietario.apellido,
-                mail:propietario.mail,
-                password:propietario.password
-            }
-
-            const localCreado = await locales.insertOne(crearLocal(nuevoLocal))
+            const localCreado = crearLocal(nuevoLocal)
+            const localInsertado = await locales.insertOne(localCreado)
             if(localCreado){
-                return nuevoLocal
+                return localCreado
             }
             throw crearErrorDatosNoInsertados('No ha sido posible insertar el local')
         },
