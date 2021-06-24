@@ -28,7 +28,7 @@ const crearDaoSolicitud = async () => {
             }
             else
             {
-                throw new crearErrorDatosNoInsertados('Ya existe una solicitud con el mail que intenta usar')
+                throw crearErrorDatosNoInsertados('Ya existe una solicitud con el mail que intenta usar')
             }
         }
     }

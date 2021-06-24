@@ -11,7 +11,6 @@ class CasoDeUso_NotificarAdministrador
 
     async hacer(urlArchivo, mailAdmin, datosPropietario, datosLocal)
     {
-        
         //Generar enlace para acceder al documento
         const enlaceArchivo = '<a href='+urlArchivo+'>Aqui</a>'
         const localCreado = await this.daoLocal.add(datosLocal, datosPropietario)
@@ -26,6 +25,7 @@ class CasoDeUso_NotificarAdministrador
         const respuesta = await this.generadorDeEmail.sendEmail(mailAdmin, 'Solicitud Aprobación de Propietario',
         'Enlace a la documentación: '+enlaceArchivo +'. Mail propietario: '+localCreado.propietario.mail);
         console.log('mail de nueva solicitud enviado al administrador ')
+        
     }
 }
 
