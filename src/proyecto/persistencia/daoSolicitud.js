@@ -19,7 +19,7 @@ const crearDaoSolicitud = async () => {
             const solicitudBuscada =  await solicitudes.findOne( { mailPropietario: nuevaSolicitud.mailPropietario })
             if(!solicitudBuscada)
             {
-                
+
                 let cursorLastSolicitud = await solicitudes.find({}).sort({ id: -1 }).limit(1)
                 cursorLastSolicitud = await cursorLastSolicitud.next()
                 nuevaSolicitud.id = typeof cursorLastSolicitud?.id !== 'null' ? cursorLastSolicitud?.id + 1 : 0
