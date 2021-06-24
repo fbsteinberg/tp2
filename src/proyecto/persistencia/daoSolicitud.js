@@ -30,6 +30,12 @@ const crearDaoSolicitud = async () => {
             {
                 throw crearErrorDatosNoInsertados('Ya existe una solicitud con el mail que intenta usar')
             }
+        },
+        actualizarEstadoSolicitud : async (solicitud) => {
+            const status = await solicitudes.updateOne({ "id" : Number(solicitud.id) }, {$set: {estado: solicitud.estado}});
+            if(status?.result?.nModified === 0){
+                throw crearErrorDatosNoInsertados('No ha sido posible actualizar el estado de la solicitud')
+            }
         }
     }
     return daoSolicitud
