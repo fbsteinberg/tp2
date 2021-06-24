@@ -4,6 +4,8 @@ import fs from 'fs'
 import { crearServidor } from '../src/compartidos/servidor/servidor.js'
 import { getServerPort } from '../src/config.js'
 
+try{
+  
 const servidor = crearServidor();
 
 const port = getServerPort();
@@ -28,6 +30,13 @@ const res = await axios.post(`http://localhost:${port}/api/solicitudes/`, data, 
 })
 
 await servidor.desconectar();
+
+}
+catch(e)
+{
+  console.log(e)
+}
+
 
 
 
