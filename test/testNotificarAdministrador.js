@@ -12,7 +12,7 @@ await servidor.conectar(port);
 let data = new FormData();
 data.append('nombrePropietario','Jose' )
 data.append('apellido', 'perez')
-data.append('mail', 'joseperez@gmail.com')
+data.append('mail', 'joseperez1@gmail.com')
 data.append('password', 12345)
 data.append('nombreLocal','g')
 data.append('cantidad',5)

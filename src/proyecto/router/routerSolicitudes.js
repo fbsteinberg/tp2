@@ -24,7 +24,6 @@ const crearSolicitudesRouter = () => {
     try {
         if (Object.prototype.hasOwnProperty.call(req.file, 'originalname')) {
             const urlArchivo = `http://localhost:${getServerPort()}/static/${req.file.originalname}`
-            console.log(urlArchivo)
             const datosPropietario = {
                 mail:req.body.mail,
                 nombre:req.body.nombrePropietario,
@@ -42,6 +41,7 @@ const crearSolicitudesRouter = () => {
             const CUFactory = await CU_NA_Factory.crearCUFactory()
             const cu = await CUFactory.crearCU()
             await cu.hacer(urlArchivo, getMailAdmin(), datosPropietario, datosLocal)
+            res.json({ result: 'ok' })
         } else {
             throw crearErrorFaltaArchivo('No se ha adjuntado el archivo')
         }
