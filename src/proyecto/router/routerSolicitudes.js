@@ -30,14 +30,14 @@ const crearSolicitudesRouter = () => {
                 apellido:req.body.apellido,
                 password:req.body.password
             }
-            
+
             const datosLocal = {
                 nombre: req.body.nombreLocal,
                 cantidad: req.body.cantidad,
                 horarioMin: req.body.horarioMin,
                 horarioMax: req.body.horarioMax
             }
-            
+
             const CUFactory = await CU_NA_Factory.crearCUFactory()
             const cu = await CUFactory.crearCU()
             await cu.hacer(urlArchivo, getMailAdmin(), datosPropietario, datosLocal)
@@ -53,13 +53,17 @@ const crearSolicitudesRouter = () => {
   router.use((error, req, res, next) => {
     switch(error.type) {
       case 'ERROR_DATOS_INVALIDOS':
+          res.status(400);
+          break
       case 'ERROR_DATOS_FALTANTES':
-        res.status(400);
+        res.status(401);
+        break
       case 'ERROR_DATOS_NO_ENCONTRADOS':
         res.status(404)
+        break
       default:
         res.status(500);
-    }
+  }
 
     res.json({ message: error.message });
   });
