@@ -1,4 +1,3 @@
-import { crearSolicitud } from "../modelos/Solicitud.js"
 import {crearClienteMongoDB} from './mongoDB.js'
 import {crearErrorDatosNoEncontrados, crearErrorDatosNoInsertados} from '../errores/errorDAO.js'
 
@@ -16,21 +15,16 @@ const crearDaoSolicitud = async () => {
             delete solicitudBuscada._id
             return solicitudBuscada
         },
-        guardarSolicitud : async (urlArchivo, mailPropietario, idLocal) => {
-            const solicitudBuscada =  await solicitudes.findOne( { mail: mailPropietario })
+        guardarSolicitud : async (nuevaSolicitud) => {
+            const solicitudBuscada =  await solicitudes.findOne( { mail: nuevaSolicitud.mailPropietario })
+
             if(!solicitudBuscada)
             {
-                const nuevaSolicitud = {}
+                
                 let cursorLastSolicitud = await solicitudes.find({}).sort({ id: -1 }).limit(1)
                 cursorLastSolicitud = await cursorLastSolicitud.next()
                 nuevaSolicitud.id = typeof cursorLastSolicitud?.id !== 'null' ? cursorLastSolicitud?.id + 1 : 0
-                nuevaSolicitud.idLocal = idLocal
-                nuevaSolicitud.mailPropietario = mailPropietario
-                nuevaSolicitud.urlArchivo = urlArchivo
-                nuevaSolicitud.fechaSolicitud = Date.now()
-                nuevaSolicitud.estado = 'enviado-administrador'
-                const solicitudCreada = crearSolicitud(nuevaSolicitud)
-                const solicitudGuardada = await solicitudes.insertOne(solicitudCreada)
+                const solicitudGuardada = await solicitudes.insertOne(nuevaSolicitud)
                 return solicitudGuardada
             }
             else
