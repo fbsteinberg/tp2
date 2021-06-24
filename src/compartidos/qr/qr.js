@@ -17,7 +17,7 @@ function generarQR(ruta) {
                 console.log(`QR Generado exitosamente en ${ruta}/${opciones.archivo}`)
                 return `http://localhost:${getServerPort()}/static/${opciones.archivo}`
             } catch (err) {
-                throw Error(`Ocurrió un error al general el QR. Detalles: ${err}`)
+                throw new Error(`Ocurrió un error al general el QR. Detalles: ${err}`)
             }
         }
     }

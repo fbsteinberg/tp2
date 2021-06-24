@@ -10,7 +10,7 @@ const crearDaoClientes = async () => {
         getById: async (id) => {
             const clienteBuscado = await clientes.findOne({ "id" : Number(id) })
             if (!clienteBuscado) {
-                throw new crearErrorDatosNoEncontrados('El cliente buscado no existe')
+                throw crearErrorDatosNoEncontrados('El cliente buscado no existe')
             }
             delete clienteBuscado._id
             return clienteBuscado
@@ -18,7 +18,7 @@ const crearDaoClientes = async () => {
         getByDni: async (dni) => {
             const clienteBuscado = await clientes.findOne({ "dni" : Number(dni) })
             if (!clienteBuscado) {
-                throw new crearErrorDatosNoEncontrados('El cliente buscado no existe')
+                throw crearErrorDatosNoEncontrados('El cliente buscado no existe')
             }
             delete clienteBuscado._id
             return clienteBuscado
